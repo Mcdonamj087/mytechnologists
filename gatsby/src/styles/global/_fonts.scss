@@ -1,0 +1,30 @@
+/**********************************************
+ Fonts
+**********************************************/
+
+@font-face {
+  font-family: 'Gotham';
+  src: url('/fonts/GothamBook.woff2') format('woff2'),
+    url('/fonts/GothamBook.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gotham';
+  src: url('/fonts/GothamMedium.woff2') format('woff2'),
+    url('/fonts/GothamMedium.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gotham';
+  src: url('/fonts/GothamBold.woff2') format('woff2'),
+    url('/fonts/GothamBold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}

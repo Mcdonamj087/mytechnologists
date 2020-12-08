@@ -1,0 +1,47 @@
+export default {
+  name: 'serviceSection',
+  type: 'object',
+  fields: [
+    {
+      title: 'Headline',
+      name: 'headline',
+      type: 'string',
+      validation: Rule => Rule.required(),
+    },
+    {
+      title: 'Subhead',
+      name: 'subhead',
+      type: 'text',
+      rows: 2,
+      validation: Rule => Rule.required(),
+    },
+    {
+      title: 'Featured Image',
+      name: 'featuredImage',
+      type: 'image',
+    },
+    {
+      title: `'Purchase' Button Text`,
+      name: 'purchaseBtnText',
+      description: 'Max characters: 17.',
+      type: 'string',
+      validation: Rule => Rule.max(17),
+    },
+    {
+      title: `'Learn More' Button Text`,
+      name: 'learnBtnText',
+      description: 'Max characters: 17.',
+      type: 'string',
+      validation: Rule => Rule.max(17),
+    },
+    {
+      title: `Display Order`,
+      name: `order`,
+      description: `The order in which the service will display on your homepage and in menus.`,
+      type: `number`,
+      options: {
+        list: [1, 2, 3],
+      },
+    },
+  ],
+};
