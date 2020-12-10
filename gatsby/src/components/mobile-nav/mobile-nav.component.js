@@ -41,6 +41,9 @@ const MobileNav = () => {
       </div>
       <div id='mt-mobile-nav--panel'>
         <nav>
+          <Link className='mobile-nav-item' to='/'>
+            Home
+          </Link>
           <Link className='mobile-nav-item' to='/why-us/'>
             Why Us
           </Link>

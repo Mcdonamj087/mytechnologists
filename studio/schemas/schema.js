@@ -6,13 +6,25 @@ import schemaTypes from 'all:part:@sanity/base/schema-type';
 
 // Imported schemas
 import homepage from './homepage';
+import servicePage from './service-page';
 import homepageServices from './homepageServices';
-import serviceSection from './serviceSection';
+import serviceGeneral from './service-general';
+import serviceHomepage from './service-homepage';
+import serviceObject from './service-object';
+import servicePurchasePage from './service-purchase-page';
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
   // We name our schema
   name: 'default',
   // Then proceed to concatenate our document type
   // to the ones provided by any plugins that are installed
-  types: schemaTypes.concat([homepage, homepageServices, serviceSection]),
+  types: schemaTypes.concat([
+    homepage,
+    homepageServices,
+    serviceGeneral,
+    serviceHomepage,
+    servicePage,
+    serviceObject,
+    servicePurchasePage,
+  ]),
 });

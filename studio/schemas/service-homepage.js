@@ -1,5 +1,5 @@
 export default {
-  name: 'serviceSection',
+  name: 'serviceHomepage',
   type: 'object',
   fields: [
     {
@@ -33,15 +33,6 @@ export default {
       description: 'Max characters: 17.',
       type: 'string',
       validation: Rule => Rule.max(17),
-    },
-    {
-      title: `Display Order`,
-      name: `order`,
-      description: `The order in which the service will display on your homepage and in menus.`,
-      type: `number`,
-      options: {
-        list: [1, 2, 3],
-      },
     },
   ],
 };

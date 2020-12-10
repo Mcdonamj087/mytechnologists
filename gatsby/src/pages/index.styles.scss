@@ -1,5 +1,13 @@
-.homepage-scroll-wrapper {
+#homepage-scroll-wrapper {
   scroll-snap-type: y mandatory;
   overflow-y: scroll;
   height: 100vh;
+}
+
+.mt-zeus-hero-content {
+  &[style*='opacity: 0;'] {
+    .mt-zeus-hero-content--foot {
+      pointer-events: none;
+    }
+  }
 }

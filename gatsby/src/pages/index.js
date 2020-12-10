@@ -1,9 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Controller, Scene } from 'react-scrollmagic';
 import { Tween } from 'react-gsap';
 import { graphql } from 'gatsby';
-
-import DATA from './data';
 
 import Layout from '../components/layout';
 import Header from '../components/header/header.component';
@@ -13,23 +11,29 @@ import ZeusHero from '../components/zeus-hero/zeus-hero.component';
 
 import './index.styles.scss';
 
-const IndexPage = query => {
+const IndexPage = ({ data }) => {
   const {
     homepageIntroHero__headline,
     homepageIntroHero__subhead,
     homepageIntroHero__featuredImage,
     homepageServices,
-  } = query.data.allSanityHomepage.nodes[0];
+  } = data.homepage.nodes[0];
 
-  console.log(homepageIntroHero__headline);
+  const services = data.services.nodes;
 
-  console.log(Object.values(homepageServices));
+  useEffect(() => {
+    console.log('component mounted');
+  }, []);
+
   return (
     <Layout>
       <Header />
       <MobileNav />
-      <main className='homepage-scroll-wrapper'>
-        <Controller container='.homepage-scroll-wrapper'>
+      <main id='homepage-scroll-wrapper'>
+        <Controller container='#homepage-scroll-wrapper'>
+          {/**************************************************
+           Homepage Top Section
+           **************************************************/}
           <Scene
             duration={() => window.innerHeight / 2}
             indicators={false}
@@ -57,41 +61,62 @@ const IndexPage = query => {
             }}
           </Scene>
 
-          {/************************************************** 
+          {/**************************************************
            Loop through service planks
            **************************************************/}
+          {services
+            .sort((a, b) =>
+              a.servicePageContent.general.order >
+              b.servicePageContent.general.order
+                ? 1
+                : -1
+            )
+            .map(
+              ({
+                id,
+                servicePageContent: {
+                  general: { navText },
+                  homepageContent: { featuredImage, ...props },
+                  purchasePageContent: {
+                    slug: { current: purchaseSlug },
+                  },
+                },
+              }) => {
+                const slug = navText.toLowerCase().split(' ').join('-');
+                return (
+                  <Scene
+                    key={id}
+                    duration={() => window.innerHeight}
+                    indicators={false}
+                    triggerElement={`#${slug}`}>
+                    {progress => {
+                      // Make the progress value reverse after halfway point
+                      const modProg =
+                        progress < 0.5 ? progress * 2 : (1 - progress) * 2;
 
-          {Object.values(homepageServices)
-            .sort((a, b) => (a.order > b.order ? 1 : -1))
-            .map(({ bkgColor, featuredImage, ...props }, idx) => (
-              <Scene
-                key={idx}
-                duration={() => window.innerHeight}
-                indicators={false}
-                triggerElement={`#trigger${idx + 1}`}>
-                {progress => {
-                  // Make the progress value reverse after halfway point
-                  const modProg =
-                    progress < 0.5 ? progress * 2 : (1 - progress) * 2;
-                  return (
-                    <Tween
-                      to={{
-                        opacity: 1,
-                      }}
-                      ease='Power1.easeInOut'
-                      progress={modProg}
-                      paused>
-                      <ZeusHero
-                        id={`trigger${idx + 1}`}
-                        style={{ opacity: '0' }}
-                        featuredImage={featuredImage.asset.fluid}
-                        {...props}
-                      />
-                    </Tween>
-                  );
-                }}
-              </Scene>
-            ))}
+                      return (
+                        <Tween
+                          to={{
+                            opacity: 1,
+                          }}
+                          ease='Power1.easeInOut'
+                          progress={modProg}
+                          paused>
+                          <ZeusHero
+                            id={slug}
+                            name={slug}
+                            style={{ opacity: '0' }}
+                            featuredImage={featuredImage.asset.fluid}
+                            purchaseSlug={purchaseSlug}
+                            {...props}
+                          />
+                        </Tween>
+                      );
+                    }}
+                  </Scene>
+                );
+              }
+            )}
         </Controller>
       </main>
     </Layout>
@@ -99,60 +124,46 @@ const IndexPage = query => {
 };
 
 export const query = graphql`
-  query MyQuery {
-    allSanityHomepage {
+  query {
+    homepage: allSanityHomepage {
       nodes {
         homepageIntroHero__featuredImage {
           asset {
-            fluid(maxWidth: 1440) {
+            fluid(maxWidth: 1680) {
               ...GatsbySanityImageFluid
             }
           }
         }
         homepageIntroHero__headline
         homepageIntroHero__subhead
-        homepageServices {
-          careerCoaching__content {
-            headline
-            subhead
-            learnBtnText
-            purchaseBtnText
-            featuredImage {
-              asset {
-                fluid(maxWidth: 1440) {
-                  ...GatsbySanityImageFluid
-                }
-              }
-            }
+      }
+    }
+
+    services: allSanityServicePage {
+      nodes {
+        id
+        servicePageContent {
+          general {
+            navText
             order
           }
-          offerNegotiation__content {
+          homepageContent {
             headline
             subhead
-            learnBtnText
-            purchaseBtnText
             featuredImage {
               asset {
-                fluid(maxWidth: 1440) {
+                fluid(maxWidth: 1680) {
                   ...GatsbySanityImageFluid
                 }
               }
             }
-            order
+            purchaseBtnText
+            learnBtnText
           }
-          resumeWriting__content {
-            headline
-            subhead
-            learnBtnText
-            purchaseBtnText
-            featuredImage {
-              asset {
-                fluid(maxWidth: 1440) {
-                  ...GatsbySanityImageFluid
-                }
-              }
+          purchasePageContent {
+            slug {
+              current
             }
-            order
           }
         }
       }

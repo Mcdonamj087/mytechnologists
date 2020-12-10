@@ -1,0 +1,8 @@
+@import '../../styles/core';
+
+.service-purchase--main {
+  background: #45a2f87c;
+  margin-top: $header-height;
+  height: calc(100vh - #{$header-height});
+  overflow: hidden;
+}

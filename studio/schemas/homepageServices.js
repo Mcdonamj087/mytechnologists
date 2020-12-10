@@ -19,17 +19,17 @@ export default {
   fields: [
     {
       name: 'careerCoaching__content',
-      type: 'serviceSection',
+      type: 'serviceHomepage',
       fieldset: 'careerCoaching',
     },
     {
       name: 'resumeWriting__content',
-      type: 'serviceSection',
+      type: 'serviceHomepage',
       fieldset: 'resumeWriting',
     },
     {
       name: 'offerNegotiation__content',
-      type: 'serviceSection',
+      type: 'serviceHomepage',
       fieldset: 'offerNegotiation',
     },
   ],
