@@ -32,10 +32,6 @@ export default {
       type: 'image',
       fieldset: 'homepageIntroHero',
     },
-    {
-      name: 'homepageServices',
-      type: 'homepageServices',
-    },
   ],
   preview: {
     prepare: () => {

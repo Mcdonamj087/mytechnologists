@@ -1,6 +1,7 @@
 import Tabs from 'sanity-plugin-tabs';
 
 export default {
+  title: 'Service Data Object',
   name: 'serviceObject',
   type: 'object',
   inputComponent: Tabs,
@@ -18,15 +19,13 @@ export default {
 
   fields: [
     {
-      title: ' ',
-      description:
-        'This is general information about the service you are offering. It will be pulled into various places on the site.',
+      title: 'General Service Information',
       name: 'general',
       type: 'serviceGeneral',
       fieldset: 'general',
     },
     {
-      title: ' ',
+      title: 'Homepage Section Content',
       description:
         'On your homepage, there is a section for each service you have created. This content is used to populate that section.',
       name: 'homepageContent',
@@ -34,7 +33,7 @@ export default {
       fieldset: 'homepage',
     },
     {
-      title: ' ',
+      title: 'Purchase Page Content',
       name: 'purchasePageContent',
       type: 'servicePurchasePage',
       fieldset: 'purchasePage',

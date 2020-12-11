@@ -1,4 +1,5 @@
 export default {
+  title: 'Service General Info',
   name: 'serviceGeneral',
   type: 'object',
   fields: [

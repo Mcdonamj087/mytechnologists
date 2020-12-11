@@ -7,7 +7,6 @@ import schemaTypes from 'all:part:@sanity/base/schema-type';
 // Imported schemas
 import homepage from './homepage';
 import servicePage from './service-page';
-import homepageServices from './homepageServices';
 import serviceGeneral from './service-general';
 import serviceHomepage from './service-homepage';
 import serviceObject from './service-object';
@@ -20,7 +19,6 @@ export default createSchema({
   // to the ones provided by any plugins that are installed
   types: schemaTypes.concat([
     homepage,
-    homepageServices,
     serviceGeneral,
     serviceHomepage,
     servicePage,

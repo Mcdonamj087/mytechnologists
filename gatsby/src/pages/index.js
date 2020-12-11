@@ -16,7 +16,6 @@ const IndexPage = ({ data }) => {
     homepageIntroHero__headline,
     homepageIntroHero__subhead,
     homepageIntroHero__featuredImage,
-    homepageServices,
   } = data.homepage.nodes[0];
 
   const services = data.services.nodes;

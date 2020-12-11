@@ -17,6 +17,8 @@ async function turnServicesIntoPages({ graphql, actions }) {
               }
               headline
               subhead
+              price
+              eventLink
             }
           }
         }
@@ -25,13 +27,13 @@ async function turnServicesIntoPages({ graphql, actions }) {
   `);
 
   // 3. Loop over each blog article and create a page for that article
-  data.servicePages.nodes.forEach(service => {
+  data.servicePages.nodes.forEach(({ servicePageContent }) => {
     // console.log(service.servicePageContent.purchasePageContent);
     actions.createPage({
-      path: service.servicePageContent.purchasePageContent.slug.current,
+      path: servicePageContent.purchasePageContent.slug.current,
       component: servicePurchasePageTemplate,
       context: {
-        pageContent: service.servicePageContent.purchasePageContent,
+        pageContent: servicePageContent.purchasePageContent,
       },
     });
   });

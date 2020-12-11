@@ -2,7 +2,7 @@ import React from 'react';
 
 import './service-purchase-sidebar.styles.scss';
 
-const ServicePurchaseSidebar = ({ title, description }) => {
+const ServicePurchaseSidebar = ({ title, description, price }) => {
   return (
     <div className='service-purchase-sidebar'>
       <div className='service-details'>
@@ -14,7 +14,7 @@ const ServicePurchaseSidebar = ({ title, description }) => {
           <li>Quisque libero metus condimentum</li>
           <li>Suspendisse non nisl sit amet</li>
         </ul>
-        <h3 className='service-details--price'>$299.99</h3>
+        <h3 className='service-details--price'>{`$${price}`}</h3>
       </div>
 
       <div className='foot'>Paypal pay badge</div>

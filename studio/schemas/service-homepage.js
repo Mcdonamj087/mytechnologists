@@ -1,4 +1,5 @@
 export default {
+  title: 'Homepage Service Content',
   name: 'serviceHomepage',
   type: 'object',
   fields: [

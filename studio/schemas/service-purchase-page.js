@@ -1,4 +1,5 @@
 export default {
+  title: 'Service Purchase Page',
   name: 'servicePurchasePage',
   type: 'object',
   fields: [
@@ -24,6 +25,18 @@ export default {
       type: 'text',
       rows: 2,
       validation: Rule => Rule.required(),
+    },
+    {
+      title: 'Price',
+      name: 'price',
+      type: 'number',
+      validation: Rule => Rule.required() && Rule.precision(2),
+    },
+    {
+      title: 'Calendly Event Link',
+      description: 'Used to pull in the correct scheduling calendar',
+      name: 'eventLink',
+      type: 'url',
     },
   ],
 };
