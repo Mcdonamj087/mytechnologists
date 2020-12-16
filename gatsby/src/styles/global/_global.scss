@@ -77,7 +77,7 @@ ul {
 }
 
 a {
-  color: blue;
+  color: #0077ff;
 
   &:hover {
     text-decoration: none;
@@ -87,6 +87,11 @@ a {
 strong,
 b {
   font-weight: bold;
+}
+
+em,
+i {
+  font-style: italic;
 }
 
 ul,
@@ -104,7 +109,7 @@ ul {
 
     &:before {
       content: '• ';
-      color: blue;
+      color: black;
       position: absolute;
       left: -20px;
       font-size: 1.2em;

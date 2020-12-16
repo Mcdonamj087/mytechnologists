@@ -2,7 +2,7 @@
   font-size: 32px;
   margin-bottom: 12px;
   letter-spacing: -0.1rem;
-  line-height: 1;
+  line-height: 1.2;
 
   @include breakpoint(md) {
     font-size: 36px;
@@ -22,25 +22,26 @@
 
   @include breakpoint(lg) {
     font-size: 70px;
-    line-height: 0.9em;
+    line-height: 0.9rem;
   }
 }
 
 @mixin h2-h6-globals {
-  line-height: 1.1em;
-  margin-bottom: 0.5556em;
+  line-height: 1.1;
+  letter-spacing: -0.05rem;
+  margin-bottom: 0.5556rem;
 }
 
 @mixin h2 {
-  font-size: 28px;
+  font-size: 24px;
   @include h2-h6-globals;
 
   @include breakpoint(md) {
-    font-size: 32px;
+    font-size: 30px;
   }
 
   @include breakpoint(lg) {
-    font-size: 36px;
+    font-size: 34px;
   }
 }
 
@@ -51,17 +52,22 @@
 
 @mixin h4 {
   @include h2-h6-globals;
-  font-size: 24px;
-}
-
-@mixin h5 {
-  @include h2-h6-globals;
   font-size: 20px;
 }
 
+@mixin h5 {
+  font-size: 20px;
+  line-height: 1.4;
+  text-transform: uppercase;
+  letter-spacing: 0.03rem;
+}
+
 @mixin h6 {
-  @include h2-h6-globals;
-  font-size: 18px;
+  font-size: 13px;
+  line-height: 1.4;
+  text-transform: uppercase;
+  letter-spacing: 0.03rem;
+  font-weight: 600;
 }
 
 @mixin body-small() {

@@ -15,6 +15,14 @@
   z-index: 10001;
   cursor: pointer;
 
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: auto 5px -webkit-focus-ring-color;
+  }
+
   span {
     display: block;
     background: $black;
@@ -86,6 +94,7 @@ body.mobile-nav-is-open {
       text-decoration: none;
       text-transform: uppercase;
       line-height: 1.4;
+      letter-spacing: 0.03em;
       font-size: 13px;
       font-weight: 600;
       color: $black;

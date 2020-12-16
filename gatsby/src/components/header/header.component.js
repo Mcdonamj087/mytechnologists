@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link, useStaticQuery } from 'gatsby';
+import { Link, useStaticQuery, graphql } from 'gatsby';
+import { slugify } from '../../utils';
 
 import Logo from '../../assets/svg/my-technologist-logo.inline.svg';
 
@@ -37,7 +38,7 @@ const Header = () => {
           )
           .map(service => {
             const navText = service.servicePageContent.general.navText;
-            const slug = navText.toLowerCase().split(' ').join('-');
+            const slug = slugify(navText);
             return (
               <Link key={service._id} to={`/#${slug}`}>
                 {navText}

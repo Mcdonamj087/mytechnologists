@@ -1,6 +1,7 @@
 import React, { forwardRef } from 'react';
 import Button from '../button/button.component';
 import BackgroundImage from 'gatsby-background-image';
+import ScrollArrow from '../scroll-arrow/scroll-arrow.component';
 import { Element } from 'react-scroll';
 
 import './zeus-hero.styles.scss';
@@ -48,11 +49,7 @@ const ZeusHero = forwardRef((props, ref) => {
             {!props.purchaseBtnText &&
             !props.learnBtnText &&
             props.scrollArrow ? (
-              <div className='mt-zeus-hero-content--scroll-arrow'>
-                <span />
-                <span />
-                <span />
-              </div>
+              <ScrollArrow />
             ) : null}
           </div>
         </div>

@@ -1,34 +1,58 @@
-import React, { useEffect } from 'react';
+import React, { useRef, useLayoutEffect } from 'react';
 import { Controller, Scene } from 'react-scrollmagic';
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import { Tween } from 'react-gsap';
 import { graphql } from 'gatsby';
+import { slugify } from '../utils';
 
 import Layout from '../components/layout';
-import Header from '../components/header/header.component';
-import MobileNav from '../components/mobile-nav/mobile-nav.component';
 import ZeusHero from '../components/zeus-hero/zeus-hero.component';
-//import SEO from '../components/seo';
+import SEO from '../components/seo';
 
 import './index.styles.scss';
 
 const IndexPage = ({ data }) => {
   const {
-    homepageIntroHero__headline,
-    homepageIntroHero__subhead,
-    homepageIntroHero__featuredImage,
-  } = data.homepage.nodes[0];
+    headline,
+    subhead,
+    featuredImage,
+  } = data.homepage.nodes[0].homepageContent;
 
   const services = data.services.nodes;
 
-  useEffect(() => {
-    console.log('component mounted');
+  const {
+    metaTitle,
+    metaDescription,
+    ogTitle,
+    ogDescription,
+    previewImage,
+    twitterTitle,
+    twitterDescription,
+  } = data.homepage.nodes[0].homepageContent.seo;
+
+  const homepageScrollWrapper = useRef();
+
+  useLayoutEffect(() => {
+    disableBodyScroll(homepageScrollWrapper.current);
+
+    return () => {
+      enableBodyScroll(homepageScrollWrapper.current);
+    };
   }, []);
 
   return (
     <Layout>
-      <Header />
-      <MobileNav />
-      <main id='homepage-scroll-wrapper'>
+      <SEO
+        title={metaTitle}
+        description={metaDescription}
+        previewImage={previewImage || featuredImage.asset.fluid.src}
+        ogTitle={ogTitle}
+        ogDescription={ogDescription}
+        twitterTitle={twitterTitle}
+        twitterDescription={twitterDescription}
+      />
+
+      <main id='homepage-scroll-wrapper' ref={homepageScrollWrapper}>
         <Controller container='#homepage-scroll-wrapper'>
           {/**************************************************
            Homepage Top Section
@@ -50,9 +74,9 @@ const IndexPage = ({ data }) => {
                   paused>
                   <ZeusHero
                     id='trigger0'
-                    headline={homepageIntroHero__headline}
-                    subhead={homepageIntroHero__subhead}
-                    featuredImage={homepageIntroHero__featuredImage.asset.fluid}
+                    headline={headline}
+                    subhead={subhead}
+                    featuredImage={featuredImage.asset.fluid}
                     scrollArrow
                   />
                 </Tween>
@@ -81,7 +105,7 @@ const IndexPage = ({ data }) => {
                   },
                 },
               }) => {
-                const slug = navText.toLowerCase().split(' ').join('-');
+                const slug = slugify(navText);
                 return (
                   <Scene
                     key={id}
@@ -122,19 +146,37 @@ const IndexPage = ({ data }) => {
   );
 };
 
+// TODO: Move SEO query to external staticQuery
 export const query = graphql`
   query {
     homepage: allSanityHomepage {
       nodes {
-        homepageIntroHero__featuredImage {
-          asset {
-            fluid(maxWidth: 1680) {
-              ...GatsbySanityImageFluid
+        homepageContent {
+          headline
+          subhead
+          featuredImage {
+            asset {
+              fluid(maxWidth: 1680) {
+                ...GatsbySanityImageFluid
+              }
             }
           }
+          seo {
+            metaDescription
+            metaTitle
+            ogDescription
+            ogTitle
+            previewImage {
+              asset {
+                fluid(maxWidth: 1440) {
+                  ...GatsbySanityImageFluid
+                }
+              }
+            }
+            twitterDescription
+            twitterTitle
+          }
         }
-        homepageIntroHero__headline
-        homepageIntroHero__subhead
       }
     }
 

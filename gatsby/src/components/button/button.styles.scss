@@ -27,4 +27,13 @@
   &:hover {
     background: $black;
   }
+
+  &.white {
+    background: rgba(#fff, 0.75);
+    color: $black;
+
+    &:hover {
+      background: #fff;
+    }
+  }
 }

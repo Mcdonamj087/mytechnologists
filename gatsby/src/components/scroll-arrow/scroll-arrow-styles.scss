@@ -1,0 +1,62 @@
+@import '../../styles/core';
+
+@keyframes scroll-arrow-animation {
+  25% {
+    opacity: 1;
+  }
+  33% {
+    opacity: 1;
+    transform: translateY(30px);
+  }
+  67% {
+    opacity: 1;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(55px);
+  }
+}
+
+.scroll-arrow {
+  position: relative;
+
+  span {
+    position: absolute;
+    left: -12px;
+    width: 28px;
+    height: 3px;
+    opacity: 0;
+    transform: scale3d(0.5, 0.5, 0.5);
+    animation: scroll-arrow-animation 3s ease-out infinite;
+
+    &:first-child {
+      animation: scroll-arrow-animation 3s ease-out 1s infinite;
+    }
+
+    &:nth-child(2) {
+      animation: scroll-arrow-animation 3s ease-out 2s infinite;
+    }
+
+    &:before,
+    &:after {
+      content: ' ';
+      position: absolute;
+      top: 0;
+      height: 100%;
+      width: 51%;
+      background: $black;
+    }
+
+    &:before {
+      left: 0;
+      transform: skew(0deg, 40deg);
+    }
+
+    &:after {
+      right: 0;
+      width: 50%;
+      transform: skew(0deg, -40deg);
+    }
+  }
+}

@@ -14,23 +14,9 @@ export default {
   ],
   fields: [
     {
-      title: 'Headline',
-      name: 'homepageIntroHero__headline',
-      type: 'string',
-      fieldset: 'homepageIntroHero',
-    },
-    {
-      title: 'Subhead',
-      name: 'homepageIntroHero__subhead',
-      type: 'text',
-      rows: 2,
-      fieldset: 'homepageIntroHero',
-    },
-    {
-      title: 'Featured Image',
-      name: 'homepageIntroHero__featuredImage',
-      type: 'image',
-      fieldset: 'homepageIntroHero',
+      title: 'Homepage Content',
+      name: 'homepageContent',
+      type: 'homepageObject',
     },
   ],
   preview: {

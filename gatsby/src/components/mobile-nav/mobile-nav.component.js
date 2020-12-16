@@ -1,56 +1,93 @@
-import React, { useRef, useLayoutEffect } from 'react';
-import { Link } from 'gatsby';
-import { enableBodyScroll, disableBodyScroll } from 'body-scroll-lock';
+import React, { useState, useLayoutEffect } from 'react';
+import { Link, useStaticQuery, graphql } from 'gatsby';
+import { slugify } from '../../utils';
 
 import './mobile-nav.styles.scss';
 
 const MobileNav = () => {
-  const mobileNavTrigger = useRef();
-
-  useLayoutEffect(() => {
-    function handleNavTriggerClick(e) {
-      const target = e.target;
-      if (
-        ['mt-mobile-nav--trigger', 'mt-mobile-nav--underlay'].includes(
-          target.id
-        )
-      ) {
-        // Lock the body from scrolling if mobile nav is open
-        if (document.body.classList.contains('mobile-nav-is-open')) {
-          enableBodyScroll(mobileNavTrigger.current);
-        } else {
-          disableBodyScroll(mobileNavTrigger.current);
+  const { services } = useStaticQuery(graphql`
+    query {
+      services: allSanityServicePage {
+        nodes {
+          _id
+          servicePageContent {
+            general {
+              navText
+            }
+          }
         }
-        document.body.classList.toggle('mobile-nav-is-open');
       }
     }
-    window.addEventListener('click', handleNavTriggerClick);
+  `);
 
-    return () => {
-      window.removeEventListener('click', handleNavTriggerClick);
-    };
+  const [isOpen, toggleNavOpen] = useState(false);
+
+  const handleHamburgerClick = () => {
+    toggleNavOpen(!isOpen);
+    isOpen
+      ? document.body.classList.remove('mobile-nav-is-open')
+      : document.body.classList.add('mobile-nav-is-open');
+  };
+
+  useLayoutEffect(() => {
+    console.log('useLayoutEffect');
   }, []);
 
   return (
     <>
-      <div id='mt-mobile-nav--underlay'></div>
-      <div id='mt-mobile-nav--trigger' ref={mobileNavTrigger}>
+      <div id='mt-mobile-nav--underlay' onClick={handleHamburgerClick}></div>
+      <div
+        id='mt-mobile-nav--trigger'
+        onClick={handleHamburgerClick}
+        onKeyDown={e =>
+          (e.key === 'Enter' || e.key === ' ') && handleHamburgerClick()
+        }
+        role='button'
+        tabIndex='0'>
         <span></span>
         <span></span>
         <span></span>
       </div>
+
       <div id='mt-mobile-nav--panel'>
         <nav>
-          <Link className='mobile-nav-item' to='/'>
+          <Link
+            className='mobile-nav-item'
+            to='/'
+            onClick={handleHamburgerClick}>
             Home
           </Link>
-          <Link className='mobile-nav-item' to='/why-us/'>
+
+          {services.nodes.map(service => {
+            const navText = service.servicePageContent.general.navText;
+            const slug = slugify(navText);
+            return (
+              <Link
+                key={service._id}
+                className='mobile-nav-item'
+                to={`/#${slug}`}
+                onClick={handleHamburgerClick}>
+                {navText}
+              </Link>
+            );
+          })}
+
+          <Link
+            className='mobile-nav-item'
+            to='/why-us/'
+            onClick={handleHamburgerClick}>
             Why Us
           </Link>
-          <Link className='mobile-nav-item' to='/instructors/'>
+          <Link
+            className='mobile-nav-item'
+            to='/instructors/'
+            onClick={handleHamburgerClick}>
             Instructors
           </Link>
-          <Link className='mobile-nav-item' to='/reviews/'>
+          <Link
+            className='mobile-nav-item'
+            to='/reviews/'
+            onClick={handleHamburgerClick}>
             Reviews
           </Link>
         </nav>

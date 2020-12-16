@@ -5,18 +5,30 @@ async function turnServicesIntoPages({ graphql, actions }) {
   const servicePurchasePageTemplate = path.resolve(
     './src/templates/service-purchase-page/service-purchase-page.template.js'
   );
-  // 2. Query all blog articles
+  // 2. Query the primary brand color and service page content
   const { data } = await graphql(`
     query {
+      general: allSanityGeneral {
+        nodes {
+          generalSiteSettings {
+            primaryBrandColor {
+              hex
+            }
+          }
+        }
+      }
       servicePages: allSanityServicePage {
         nodes {
+          _id
           servicePageContent {
             purchasePageContent {
               slug {
                 current
               }
               headline
-              subhead
+              details {
+                _rawData
+              }
               price
               eventLink
             }
@@ -26,14 +38,20 @@ async function turnServicesIntoPages({ graphql, actions }) {
     }
   `);
 
+  const { general, servicePages } = data;
+  const primaryBrandColor =
+    general.nodes[0].generalSiteSettings.primaryBrandColor.hex;
+
   // 3. Loop over each blog article and create a page for that article
-  data.servicePages.nodes.forEach(({ servicePageContent }) => {
+  servicePages.nodes.forEach(({ servicePageContent, _id }) => {
     // console.log(service.servicePageContent.purchasePageContent);
     actions.createPage({
       path: servicePageContent.purchasePageContent.slug.current,
       component: servicePurchasePageTemplate,
       context: {
+        id: _id,
         pageContent: servicePageContent.purchasePageContent,
+        primaryBrandColor,
       },
     });
   });

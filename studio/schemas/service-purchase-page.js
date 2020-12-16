@@ -20,10 +20,9 @@ export default {
       validation: Rule => Rule.required(),
     },
     {
-      title: 'Subhead',
-      name: 'subhead',
-      type: 'text',
-      rows: 2,
+      title: 'Details',
+      name: 'details',
+      type: 'richTextEditor',
       validation: Rule => Rule.required(),
     },
     {
@@ -37,6 +36,11 @@ export default {
       description: 'Used to pull in the correct scheduling calendar',
       name: 'eventLink',
       type: 'url',
+    },
+    {
+      title: 'SEO',
+      name: 'seo',
+      type: 'seoObject',
     },
   ],
 };
