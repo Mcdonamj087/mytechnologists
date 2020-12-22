@@ -29,10 +29,6 @@ const MobileNav = () => {
       : document.body.classList.add('mobile-nav-is-open');
   };
 
-  useLayoutEffect(() => {
-    console.log('useLayoutEffect');
-  }, []);
-
   return (
     <>
       <div id='mt-mobile-nav--underlay' onClick={handleHamburgerClick}></div>

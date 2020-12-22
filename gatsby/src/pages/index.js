@@ -45,11 +45,11 @@ const IndexPage = ({ data }) => {
       <SEO
         title={metaTitle}
         description={metaDescription}
-        previewImage={previewImage || featuredImage.asset.fluid.src}
-        ogTitle={ogTitle}
-        ogDescription={ogDescription}
-        twitterTitle={twitterTitle}
-        twitterDescription={twitterDescription}
+        previewImage={previewImage || featuredImage?.asset.fluid.src}
+        ogTitle={ogTitle || headline}
+        ogDescription={ogDescription || subhead}
+        twitterTitle={twitterTitle || headline}
+        twitterDescription={twitterDescription || subhead}
       />
 
       <main id='homepage-scroll-wrapper' ref={homepageScrollWrapper}>
@@ -162,19 +162,19 @@ export const query = graphql`
             }
           }
           seo {
-            metaDescription
             metaTitle
-            ogDescription
-            ogTitle
+            metaDescription
             previewImage {
               asset {
                 fluid(maxWidth: 1440) {
-                  ...GatsbySanityImageFluid
+                  src
                 }
               }
             }
-            twitterDescription
+            ogTitle
+            ogDescription
             twitterTitle
+            twitterDescription
           }
         }
       }

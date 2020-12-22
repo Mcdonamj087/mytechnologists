@@ -6,7 +6,7 @@ export default {
   type: 'object',
   inputComponent: Tabs,
   fieldsets: [
-    { name: 'seo', title: 'SEO' },
+    { name: 'seo', title: 'SEO Defaults' },
     { name: 'theme', title: 'Theme' },
     { name: 'contact', title: 'Contact' },
   ],

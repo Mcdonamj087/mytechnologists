@@ -1,0 +1,95 @@
+@import '../styles/core';
+
+.instructors-main {
+  position: relative;
+  top: $header-height;
+  display: grid;
+  grid-template-columns: 1fr;
+
+  @include breakpoint('md') {
+    grid-template-columns: 350px 2fr;
+  }
+
+  @include breakpoint('lg') {
+    grid-template-columns: 445px 2fr;
+  }
+}
+
+.instructors-panel {
+  padding: 60px 8vw 20px;
+
+  @include breakpoint('md') {
+    padding: 60px 0 60px 60px;
+  }
+}
+
+.instructors-intro {
+  @include breakpoint('md') {
+    margin-bottom: 20vh;
+    padding-right: 60px;
+  }
+
+  h1 {
+    @include h3;
+  }
+}
+
+.instructor-triggers {
+  display: none;
+
+  @include breakpoint('md') {
+    display: block;
+  }
+
+  .trigger-item {
+    color: $black;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: 0.5s cubic-bezier(0.35, 0.05, 0.2, 1);
+    opacity: 0.25;
+
+    &:not(:last-child) {
+      margin-bottom: 16px;
+    }
+
+    &--name {
+      @include h3;
+      color: inherit;
+      margin-bottom: 0;
+      margin-right: 24px;
+
+      @include breakpoint('lg') {
+        @include h1;
+        margin-bottom: 0;
+      }
+    }
+
+    &--arrow {
+      opacity: 0;
+      transform: translateX(-20px);
+      transition: 0.5s cubic-bezier(0.35, 0.05, 0.2, 1);
+    }
+
+    &.active {
+      opacity: 1;
+
+      .trigger-item--arrow {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+  }
+}
+
+.instructors-content {
+  padding: 0 8vw;
+
+  @include breakpoint('md') {
+    padding: 60px;
+  }
+
+  &--inner {
+    position: relative;
+  }
+}

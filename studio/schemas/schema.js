@@ -16,6 +16,9 @@ import serviceGeneral from './service-general';
 import serviceHomepage from './service-homepage';
 import serviceObject from './service-object';
 import servicePurchasePage from './service-purchase-page';
+import instructorObject from './instructor-object';
+import instructorsPage from './instructors-page';
+import instructorsPageObject from './instructors-page-object';
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
   // We name our schema
@@ -34,5 +37,8 @@ export default createSchema({
     servicePage,
     serviceObject,
     servicePurchasePage,
+    instructorObject,
+    instructorsPage,
+    instructorsPageObject,
   ]),
 });

@@ -1,14 +1,7 @@
-/**
- * SEO component that queries for data with
- *  Gatsby's useStaticQuery React hook
- *
- * See: https://www.gatsbyjs.com/docs/use-static-query/
- */
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
-import { useStaticQuery, graphql } from 'gatsby';
+import useDefaultSeo from '../hooks/useDefaultSeo';
 
 function SEO({
   bodyClass,
@@ -21,45 +14,52 @@ function SEO({
   twitterTitle,
   twitterDescription,
 }) {
-  const { site } = useStaticQuery(
-    graphql`
-      query {
-        site {
-          siteMetadata {
-            title
-            description
-            author
-          }
-        }
-      }
-    `
-  );
+  const defaultSeo = useDefaultSeo();
 
-  console.log(site);
+  const {
+    metaTitle: defaultMetaTitle,
+    metaDescription: defaultMetaDescription,
+    ogTitle: defaultOgTitle,
+    ogDescription: defaultOgDescription,
+    previewImage: defaultPreviewImage,
+    twitterTitle: defaultTwitterTitle,
+    twitterDescription: defaultTwitterDescription,
+  } = defaultSeo.generalSEO;
 
-  const metaDescription = description || site.siteMetadata.description;
-  const defaultTitle = site.siteMetadata?.title;
+  const titleCascade = title || defaultMetaTitle;
+  const descriptionCascade = description || defaultMetaDescription;
+  const previewImageCascade =
+    previewImage || defaultPreviewImage?.asset.fluid.src;
 
   return (
     <Helmet
       htmlAttributes={{
         lang,
       }}
-      title={title || defaultTitle}
-      titleTemplate={defaultTitle ? `%s | ${defaultTitle}` : null}>
+      title={titleCascade}
+      titleTemplate={
+        titleCascade ? `%s | ${defaultSeo.organizationName}` : null
+      }>
       <body className={bodyClass} />
-      <meta name='description' content={metaDescription} />
-      <meta name='og:image' content={previewImage} />
-      <meta name='og:title' content={ogTitle || title} />
-      <meta name='og:description' content={ogDescription || metaDescription} />
+      <meta name='description' content={descriptionCascade} />
+      <meta name='og:image' content={previewImageCascade} />
+      <meta name='og:title' content={ogTitle || title || defaultOgTitle} />
+      <meta
+        name='og:description'
+        content={ogDescription || defaultOgDescription || descriptionCascade}
+      />
       <meta name='og:type' content='website' />
       <meta name='twitter:card' content='summary' />
-      <meta name='twitter:creator' content={site.siteMetadata?.author || ''} />
-      <meta name='twitter:image' content={previewImage} />
-      <meta name='twitter:title' content={twitterTitle || title} />
+      <meta name='twitter:image' content={previewImageCascade} />
+      <meta
+        name='twitter:title'
+        content={twitterTitle || defaultTwitterTitle || title}
+      />
       <meta
         name='twitter:description'
-        content={twitterDescription || metaDescription}
+        content={
+          twitterDescription || defaultTwitterDescription || descriptionCascade
+        }
       />
     </Helmet>
   );
@@ -68,6 +68,7 @@ function SEO({
 SEO.defaultProps = {
   lang: `en`,
   meta: [],
+  title: ``,
   description: ``,
 };
 
