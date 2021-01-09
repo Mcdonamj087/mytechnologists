@@ -15,7 +15,7 @@ h3,
 h4,
 h5,
 h6 {
-  color: black;
+  color: inherit;
   font-family: $primary-font;
   font-weight: 600;
 }
@@ -170,4 +170,8 @@ hr {
   right: 0;
   bottom: 0;
   left: 0;
+}
+
+.wrapper {
+  padding-top: $header-height;
 }

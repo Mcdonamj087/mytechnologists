@@ -14,7 +14,7 @@ export default {
   ],
   preview: {
     prepare: () => ({
-      title: 'Instructors Page Preview test',
+      title: 'Instructors Page',
     }),
   },
 };

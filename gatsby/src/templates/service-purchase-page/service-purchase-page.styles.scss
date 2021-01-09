@@ -7,7 +7,7 @@ body.service-purchase-page {
   }
 }
 
-.service-purchase--main {
+.service-purchase--container {
   background: #45a2f87c;
   margin-top: $header-height;
 
@@ -23,14 +23,33 @@ body.service-purchase-page {
   }
 }
 
-.service-purchase--calendar {
+.service-purchase--main {
   position: relative;
   height: 1000px;
-  padding: 8vw 8vw;
 
   @include breakpoint('md') {
     flex: 1 0 auto;
     height: auto;
-    padding: 0;
+  }
+
+  .featured-image {
+    height: 100%;
+
+    &-overlay {
+      background: $black;
+      opacity: 0.4;
+    }
+  }
+}
+
+.service-purchase--calendar {
+  margin: 8vw 8vw;
+  overflow: hidden;
+  border-radius: 10px;
+
+  @include breakpoint('md') {
+    margin: 0;
+    border-radius: unset;
+    overflow: visible;
   }
 }

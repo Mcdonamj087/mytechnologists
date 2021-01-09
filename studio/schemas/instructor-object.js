@@ -1,5 +1,5 @@
 export default {
-  title: 'Staff Data Object',
+  title: 'Instructor Data Object',
   name: 'instructorObject',
   type: 'object',
   fields: [

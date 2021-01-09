@@ -31,6 +31,7 @@ async function turnServicesIntoPages({ graphql, actions }) {
               }
               price
               eventLink
+              eventLinkAlt
             }
           }
         }

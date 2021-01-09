@@ -20,7 +20,10 @@ $breakpoint: 0;
   @if $size == sm {
     $breakpoint: 576 !global;
   }
-  
+  @if type-of($size) == 'number' {
+    $breakpoint: $size !global;
+  }
+
   @if $max {
     @media screen and (max-width: #{$breakpoint - 1}px) {
       @content;
@@ -32,8 +35,18 @@ $breakpoint: 0;
     }
   }
 
-  @if $size != xl and $size != lg and $size != md and $size != sm {
-    @error "Must choose a breakpoint named xl, lg, md, or sm";
+  @if $size !=
+    xl and
+    $size !=
+    lg and
+    $size !=
+    md and
+    $size !=
+    sm and
+    type-of($size) !=
+    'number'
+  {
+    @error "Must enter a breakpoint value: xl, lg, md, or sm -- or enter a number value (don't add a unit)";
   }
 
   @if $max != 'max' and $max != null {

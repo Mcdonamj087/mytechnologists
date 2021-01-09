@@ -7,6 +7,15 @@
   background-repeat: no-repeat;
   scroll-snap-align: start;
   position: relative;
+
+  &--image {
+    height: 100%;
+  }
+
+  &--overlay {
+    background: $black;
+    opacity: 0.6;
+  }
 }
 
 .mt-zeus-hero-content {
@@ -32,6 +41,26 @@
 
     .subhead {
       @include body-regular();
+    }
+  }
+
+  &.white-text {
+    .mt-zeus-hero-content--head {
+      color: #fff;
+
+      h1,
+      .subhead {
+        color: inherit;
+      }
+    }
+
+    .mt-zeus-hero-content--foot {
+      .scroll-arrow {
+        span:before,
+        span:after {
+          background: #fff;
+        }
+      }
     }
   }
 

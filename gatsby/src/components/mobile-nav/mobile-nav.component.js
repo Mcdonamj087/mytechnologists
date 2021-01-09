@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect } from 'react';
+import React, { useState } from 'react';
 import { Link, useStaticQuery, graphql } from 'gatsby';
 import { slugify } from '../../utils';
 
@@ -31,7 +31,15 @@ const MobileNav = () => {
 
   return (
     <>
-      <div id='mt-mobile-nav--underlay' onClick={handleHamburgerClick}></div>
+      <div
+        id='mt-mobile-nav--underlay'
+        role='button'
+        tabIndex='-1'
+        aria-label='underlay'
+        onKeyDown={e =>
+          (e.key === 'Enter' || e.key === ' ') && handleHamburgerClick()
+        }
+        onClick={handleHamburgerClick}></div>
       <div
         id='mt-mobile-nav--trigger'
         onClick={handleHamburgerClick}
@@ -82,9 +90,9 @@ const MobileNav = () => {
           </Link>
           <Link
             className='mobile-nav-item'
-            to='/reviews/'
+            to='/faq/'
             onClick={handleHamburgerClick}>
-            Reviews
+            FAQ
           </Link>
         </nav>
       </div>

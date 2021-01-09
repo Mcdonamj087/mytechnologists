@@ -1,0 +1,7 @@
+// Based on a 24 column grid
+$denominator: 24;
+
+// The function takes a number ($num) of columns and returns a percentage value
+@function columns($num) {
+  @return percentage($num / $denominator);
+}

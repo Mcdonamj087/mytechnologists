@@ -1,17 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Header from './header/header.component';
-import MobileNav from './mobile-nav/mobile-nav.component';
 
 import '../styles/styles.scss';
 
-const Layout = ({ children }) => {
+const Layout = ({ children, wrapped }) => {
   return (
-    <>
-      <Header />
-      <MobileNav />
-      {children}
-    </>
+    <>{wrapped ? <div className='wrapper'>{children}</div> : <>{children}</>}</>
   );
 };
 

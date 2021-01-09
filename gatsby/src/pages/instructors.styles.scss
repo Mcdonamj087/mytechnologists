@@ -5,13 +5,14 @@
   top: $header-height;
   display: grid;
   grid-template-columns: 1fr;
+  justify-content: space-between;
 
   @include breakpoint('md') {
     grid-template-columns: 350px 2fr;
   }
 
   @include breakpoint('lg') {
-    grid-template-columns: 445px 2fr;
+    grid-template-columns: 445px minmax(auto, 1160px);
   }
 }
 
@@ -48,6 +49,11 @@
     align-items: center;
     transition: 0.5s cubic-bezier(0.35, 0.05, 0.2, 1);
     opacity: 0.25;
+    outline: none;
+
+    &:focus-visible {
+      outline: 5px auto -webkit-focus-ring-color;
+    }
 
     &:not(:last-child) {
       margin-bottom: 16px;

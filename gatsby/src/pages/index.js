@@ -7,6 +7,7 @@ import { slugify } from '../utils';
 
 import Layout from '../components/layout';
 import ZeusHero from '../components/zeus-hero/zeus-hero.component';
+import Header from '../components/header/header.component';
 import SEO from '../components/seo';
 
 import './index.styles.scss';
@@ -16,6 +17,7 @@ const IndexPage = ({ data }) => {
     headline,
     subhead,
     featuredImage,
+    seo,
   } = data.homepage.nodes[0].homepageContent;
 
   const services = data.services.nodes;
@@ -28,7 +30,12 @@ const IndexPage = ({ data }) => {
     previewImage,
     twitterTitle,
     twitterDescription,
-  } = data.homepage.nodes[0].homepageContent.seo;
+  } = seo;
+
+  const homepageOverlay =
+    data.general.nodes[0].generalSiteSettings.homepageOverlay;
+
+  console.log(homepageOverlay);
 
   const homepageScrollWrapper = useRef();
 
@@ -45,12 +52,16 @@ const IndexPage = ({ data }) => {
       <SEO
         title={metaTitle}
         description={metaDescription}
-        previewImage={previewImage || featuredImage?.asset.fluid.src}
+        previewImage={
+          previewImage?.asset.fluid.src || featuredImage?.asset.fluid.src
+        }
         ogTitle={ogTitle || headline}
         ogDescription={ogDescription || subhead}
         twitterTitle={twitterTitle || headline}
         twitterDescription={twitterDescription || subhead}
       />
+
+      <Header inverted={homepageOverlay} />
 
       <main id='homepage-scroll-wrapper' ref={homepageScrollWrapper}>
         <Controller container='#homepage-scroll-wrapper'>
@@ -77,6 +88,7 @@ const IndexPage = ({ data }) => {
                     headline={headline}
                     subhead={subhead}
                     featuredImage={featuredImage.asset.fluid}
+                    overlay={homepageOverlay}
                     scrollArrow
                   />
                 </Tween>
@@ -130,6 +142,7 @@ const IndexPage = ({ data }) => {
                             name={slug}
                             style={{ opacity: '0' }}
                             featuredImage={featuredImage.asset.fluid}
+                            overlay={homepageOverlay}
                             purchaseSlug={purchaseSlug}
                             {...props}
                           />
@@ -149,6 +162,13 @@ const IndexPage = ({ data }) => {
 // TODO: Move SEO query to external staticQuery
 export const query = graphql`
   query {
+    general: allSanityGeneral {
+      nodes {
+        generalSiteSettings {
+          homepageOverlay
+        }
+      }
+    }
     homepage: allSanityHomepage {
       nodes {
         homepageContent {

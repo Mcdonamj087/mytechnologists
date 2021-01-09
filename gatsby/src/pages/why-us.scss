@@ -1,0 +1,192 @@
+@import '../styles/core';
+
+.why-us-page {
+  section {
+    display: flex;
+  }
+
+  .title-container {
+    margin-left: columns(2);
+    width: columns(3);
+
+    @include breakpoint('sm') {
+      margin-left: columns(3);
+    }
+
+    @include breakpoint('lg') {
+      margin-left: columns(4);
+    }
+
+    .title {
+      font-size: 14px;
+      text-orientation: upright;
+      writing-mode: vertical-lr;
+      letter-spacing: 0.43em;
+      margin-top: 5px;
+
+      @include breakpoint('sm') {
+        font-size: 16px;
+      }
+    }
+  }
+
+  .body-container {
+    width: columns(17);
+
+    @include breakpoint('sm') {
+      width: columns(15);
+    }
+
+    @include breakpoint('lg') {
+      width: columns(13);
+    }
+  }
+
+  .our-story {
+    padding-top: 60px;
+
+    @include breakpoint('sm') {
+      padding-top: 70px;
+    }
+
+    @include breakpoint('md') {
+      padding-top: 100px;
+    }
+
+    @include breakpoint('lg') {
+      padding-top: 120px;
+    }
+
+    .title-container {
+      display: flex;
+      flex-flow: column;
+      justify-content: space-between;
+      margin-bottom: 150px;
+
+      .title {
+        margin-bottom: 60px;
+      }
+    }
+
+    .body {
+      @include breakpoint('sm') {
+        font-size: 20px;
+      }
+
+      @include breakpoint('md') {
+        font-size: 24px;
+      }
+
+      @include breakpoint('lg') {
+        font-size: 28px;
+      }
+    }
+
+    .scroll-arrow {
+      margin-bottom: 61px;
+
+      span {
+        width: 20px;
+        left: -1px;
+      }
+    }
+  }
+
+  .why-us-gallery {
+    display: grid;
+    column-gap: columns(1);
+    grid-template-columns: repeat(2, columns(10.5));
+    justify-content: end;
+    transform: translateY(50%);
+
+    @include breakpoint('sm') {
+      grid-template-columns: repeat(2, columns(10));
+    }
+
+    @include breakpoint('md') {
+      grid-template-columns: repeat(3, columns(6.333333334));
+    }
+
+    @include breakpoint('lg') {
+      grid-template-columns: repeat(3, columns(6));
+    }
+
+    .image-wrap {
+      &:first-child {
+        display: none;
+
+        @include breakpoint('md') {
+          display: block;
+        }
+      }
+
+      .inner {
+        height: 0;
+        padding-bottom: percentage(6.5/10);
+        position: relative;
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      &:first-child {
+        transform: translateY(4vh);
+      }
+
+      &:last-child {
+        transform: translateY(-4vh);
+      }
+    }
+  }
+
+  .why-us {
+    background: $black;
+    padding: 32vw 0 60px;
+    color: #fff;
+
+    @include breakpoint('sm') {
+      padding: 32vw 0 80px;
+    }
+
+    @include breakpoint('sm') {
+      padding: 28vw 0 100px;
+    }
+
+    @include breakpoint('lg') {
+      padding: 20vw 0 120px;
+    }
+
+    .heading {
+      @include h3;
+      margin-bottom: 24px;
+    }
+  }
+
+  .attribution {
+    padding: 120px 0;
+    flex-flow: column;
+
+    .content {
+      .headline {
+        text-align: center;
+        margin: auto;
+        margin-bottom: 60px;
+        width: columns(16);
+      }
+    }
+
+    .logo-marqee {
+      @include breakpoint('sm') {
+        width: columns(18);
+        margin: auto;
+      }
+
+      @include breakpoint('md') {
+        width: columns(18);
+      }
+    }
+  }
+}

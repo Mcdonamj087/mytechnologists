@@ -3,6 +3,7 @@ import React from 'react';
 import { AiFillHome } from 'react-icons/ai';
 import { ImCog } from 'react-icons/im';
 import { BsPeopleFill } from 'react-icons/bs';
+import { AiFillStar } from 'react-icons/ai';
 
 export default () =>
   S.list()
@@ -12,6 +13,12 @@ export default () =>
         .title('General')
         .icon(() => <ImCog />)
         .child(S.editor().schemaType('general').documentId('general')),
+      ...S.documentTypeListItems().filter(
+        listItem =>
+          !['general', 'homepage', 'instructorsPage', 'whyUsPage'].includes(
+            listItem.getId()
+          )
+      ),
       S.listItem()
         .title('Homepage')
         .icon(() => <AiFillHome />)
@@ -22,9 +29,8 @@ export default () =>
         .child(
           S.editor().schemaType('instructorsPage').documentId('instructorsPage')
         ),
-
-      ...S.documentTypeListItems().filter(
-        listItem =>
-          !['general', 'homepage', 'instructorsPage'].includes(listItem.getId())
-      ),
+      S.listItem()
+        .title('Why Us Page')
+        .icon(() => <AiFillStar />)
+        .child(S.editor().schemaType('whyUsPage').documentId('whyUsPage')),
     ]);

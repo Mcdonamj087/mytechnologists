@@ -1,0 +1,62 @@
+@import '../../styles/core';
+
+@keyframes marqee {
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.logo-marqee-wrapper {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  height: 60px;
+
+  &:before,
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    background: linear-gradient(to right, rgba(#fff, 1), rgba(#fff, 0));
+    z-index: 10;
+    height: 100%;
+    width: 60px;
+  }
+
+  &:before {
+    left: 0;
+  }
+
+  &:after {
+    right: 0;
+    transform: rotate(180deg);
+  }
+
+  .marqee-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    display: flex;
+    animation: 18s marqee infinite linear;
+
+    &:hover {
+      animation-play-state: paused;
+    }
+
+    .marqee-item {
+      height: 60px;
+      width: 140px;
+      padding: 0 20px;
+      display: inline-block;
+
+      .logo {
+        height: 100%;
+
+        img {
+          object-fit: scale-down;
+        }
+      }
+    }
+  }
+}

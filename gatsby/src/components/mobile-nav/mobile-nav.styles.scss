@@ -58,16 +58,18 @@
 
 body.mobile-nav-is-open {
   #mt-mobile-nav--trigger {
-    span:nth-child(1) {
-      transform: translateY(0) rotate(-45deg);
-    }
+    span {
+      &:nth-child(1) {
+        transform: translateY(0) rotate(-45deg);
+      }
 
-    span:nth-child(2) {
-      width: 0;
-    }
+      &:nth-child(2) {
+        width: 0;
+      }
 
-    span:nth-child(3) {
-      transform: translateY(0) rotate(45deg);
+      &:nth-child(3) {
+        transform: translateY(0) rotate(45deg);
+      }
     }
   }
 }

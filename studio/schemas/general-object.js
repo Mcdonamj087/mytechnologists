@@ -34,6 +34,13 @@ export default {
       validation: Rule => Rule.required(),
     },
     {
+      title: 'Homepage Overlay',
+      description: `If enabled, a dark overlay will be placed on top of background photos. Text and buttons will all display white.  This is a good option if the photography you have on the homepage isn't suitable for text readability`,
+      name: 'homepageOverlay',
+      type: 'boolean',
+      fieldset: 'theme',
+    },
+    {
       title: 'Organization Name',
       description:
         'This name will be appended to your SEO titles as well as used in other areas of the site that may require your company name.',

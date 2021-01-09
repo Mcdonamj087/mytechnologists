@@ -5,6 +5,7 @@ import BackgroundImage from 'gatsby-background-image';
 import Button from '../components/button/button.component';
 
 import Layout from '../components/layout';
+import Header from '../components/header/header.component';
 import SEO from '../components/seo';
 
 const Wrapper = styled(BackgroundImage)`
@@ -46,6 +47,7 @@ const NotFoundPage = ({ data }) => {
   return (
     <Layout>
       <SEO title='404: Not found' />
+      <Header />
       <Wrapper fluid={image}>
         <Content>
           <h1>404</h1>

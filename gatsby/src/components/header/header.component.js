@@ -3,10 +3,11 @@ import { Link, useStaticQuery, graphql } from 'gatsby';
 import { slugify } from '../../utils';
 
 import Logo from '../../assets/svg/my-technologist-logo.inline.svg';
+import MobileNav from '../../components/mobile-nav/mobile-nav.component';
 
 import './header.styles.scss';
 
-const Header = () => {
+const Header = ({ inverted, whiteBkg }) => {
   const { services } = useStaticQuery(graphql`
     query {
       services: allSanityServicePage {
@@ -24,7 +25,10 @@ const Header = () => {
   `);
 
   return (
-    <header className='mt-header'>
+    <header
+      className={`mt-header ${inverted ? 'inverted' : ''} ${
+        whiteBkg ? 'white-bkg' : ''
+      }`}>
       <Link to='/' className='mt-header--logo'>
         <Logo />
       </Link>
@@ -46,6 +50,7 @@ const Header = () => {
             );
           })}
       </nav>
+      <MobileNav />
     </header>
   );
 };

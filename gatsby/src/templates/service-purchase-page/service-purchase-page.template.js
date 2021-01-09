@@ -1,7 +1,8 @@
-import React, { useLayoutEffect } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import Layout from '../../components/layout';
+import Header from '../../components/header/header.component';
 import { graphql } from 'gatsby';
-import BackgroundImage from 'gatsby-background-image';
+import Image from 'gatsby-image';
 import ServicePurchaseSidebar from '../../components/service-purchase-sidebar/service-purchase-sidebar.component';
 import { InlineWidget } from 'react-calendly';
 
@@ -17,34 +18,67 @@ const ServicePurchasePage = ({ pageContext, data }) => {
   const featuredImage =
     data.thisService.servicePageContent.homepageContent.featuredImage;
 
-  const { price, headline, details, eventLink } = pageContext.pageContent;
+  const {
+    price,
+    headline,
+    details,
+    eventLink,
+    eventLinkAlt,
+  } = pageContext.pageContent;
+
   const primaryColorHex = pageContext.primaryBrandColor.substr(1);
+
+  const [activeCalendar, toggleActiveCalendar] = useState(1);
+
+  const handleEventBtnClick = btnNumber => {
+    toggleActiveCalendar(btnNumber);
+  };
 
   return (
     <Layout>
-      <main className='service-purchase--main'>
+      <Header />
+      <section className='service-purchase--container'>
         <ServicePurchaseSidebar
           price={price}
           title={headline}
           details={details}
+          eventLinkBtns={eventLink && eventLinkAlt}
+          activeCalendar={activeCalendar}
+          btnClickHandler={handleEventBtnClick}
         />
-        <BackgroundImage
-          className='service-purchase--calendar'
-          fluid={featuredImage.asset.fluid}>
-          {eventLink && (
-            <InlineWidget
-              url={eventLink}
-              styles={{ height: '100%' }}
-              pageSettings={{
-                backgroundColor: 'ffffff',
-                hideLandingPageDetails: true,
-                primaryColor: primaryColorHex,
-                textColor: '000000',
-              }}
-            />
+        <div className='service-purchase--main'>
+          <Image className='featured-image' fluid={featuredImage.asset.fluid} />
+
+          {eventLink && activeCalendar === 1 && (
+            <div className='service-purchase--calendar absolute-0'>
+              <InlineWidget
+                url={eventLink}
+                styles={{ height: '100%' }}
+                pageSettings={{
+                  backgroundColor: 'ffffff',
+                  hideLandingPageDetails: true,
+                  primaryColor: primaryColorHex,
+                  textColor: '000000',
+                }}
+              />
+            </div>
           )}
-        </BackgroundImage>
-      </main>
+          {eventLinkAlt && activeCalendar === 2 && (
+            <div className='service-purchase--calendar absolute-0'>
+              <InlineWidget
+                url={eventLinkAlt}
+                styles={{ height: '100%' }}
+                pageSettings={{
+                  backgroundColor: 'ffffff',
+                  hideLandingPageDetails: true,
+                  primaryColor: primaryColorHex,
+                  textColor: '000000',
+                }}
+              />
+            </div>
+          )}
+        </div>
+      </section>
     </Layout>
   );
 };
