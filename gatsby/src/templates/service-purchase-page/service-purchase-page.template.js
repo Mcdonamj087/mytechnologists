@@ -3,12 +3,23 @@ import Layout from '../../components/layout';
 import Header from '../../components/header/header.component';
 import { graphql } from 'gatsby';
 import Image from 'gatsby-image';
-import ServicePurchaseSidebar from '../../components/service-purchase-sidebar/service-purchase-sidebar.component';
+import ContentSidebar from '../../components/content-sidebar/content-sidebar.component';
 import { InlineWidget } from 'react-calendly';
+import { Tween } from 'react-gsap';
+import BlockContent from '@sanity/block-content-to-react';
+import Button from '../../components/button/button.component';
 
 import './service-purchase-page.styles.scss';
 
 const ServicePurchasePage = ({ pageContext, data }) => {
+  const tweenFrom = { y: '50', opacity: 0 };
+  const tweenTo = { y: '0', opacity: 1 };
+  const tweenDuration = 1.5;
+  const tweenEase = 'Expo.easeOut';
+  const tweenDelay = 0.15;
+
+  const paypalBadge = data.allFile.nodes[0];
+
   useLayoutEffect(() => {
     document.body.classList.add('service-purchase-page');
 
@@ -38,14 +49,77 @@ const ServicePurchasePage = ({ pageContext, data }) => {
     <Layout>
       <Header />
       <section className='service-purchase--container'>
-        <ServicePurchaseSidebar
-          price={price}
-          title={headline}
-          details={details}
-          eventLinkBtns={eventLink && eventLinkAlt}
-          activeCalendar={activeCalendar}
-          btnClickHandler={handleEventBtnClick}
-        />
+        {/* price={price}
+        title={headline}
+        details={details}
+        eventLinkBtns={eventLink && eventLinkAlt}
+        activeCalendar={activeCalendar}
+        btnClickHandler={handleEventBtnClick} */}
+
+        <ContentSidebar>
+          <div className='service-details'>
+            <Tween
+              from={tweenFrom}
+              to={tweenTo}
+              duration={tweenDuration}
+              ease={tweenEase}
+              delay={tweenDelay}>
+              <h1 className='service-details--title'>{headline}</h1>
+            </Tween>
+            <Tween
+              from={tweenFrom}
+              to={tweenTo}
+              duration={tweenDuration}
+              ease={tweenEase}
+              delay={tweenDelay * 2}>
+              <div className='service-details--details'>
+                <BlockContent
+                  blocks={details._rawData}
+                  renderContainerOnSingleChild={true}
+                />
+              </div>
+            </Tween>
+            <Tween
+              from={tweenFrom}
+              to={tweenTo}
+              duration={tweenDuration}
+              ease={tweenEase}>
+              <h3 className='service-details--price'>{`$${price}`}</h3>
+            </Tween>
+          </div>
+
+          {eventLinkAlt && (
+            <Tween
+              from={tweenFrom}
+              to={tweenTo}
+              duration={tweenDuration}
+              ease={tweenEase}
+              delay={tweenDelay * 3}>
+              <div className='event-link-buttons'>
+                <Button
+                  type='button'
+                  onClick={() => handleEventBtnClick(1)}
+                  className={activeCalendar === 1 ? '' : 'outline'}>
+                  Group 1
+                </Button>
+                <Button
+                  type='button'
+                  onClick={() => handleEventBtnClick(2)}
+                  className={activeCalendar === 2 ? '' : 'outline'}>
+                  Group 2
+                </Button>
+              </div>
+            </Tween>
+          )}
+
+          <div className='foot'>
+            <Image
+              className='paypal-badge'
+              fluid={paypalBadge.childImageSharp.fluid}
+            />
+          </div>
+        </ContentSidebar>
+
         <div className='service-purchase--main'>
           <Image className='featured-image' fluid={featuredImage.asset.fluid} />
 
@@ -94,6 +168,15 @@ export const data = graphql`
                 ...GatsbySanityImageFluid
               }
             }
+          }
+        }
+      }
+    }
+    allFile(filter: { relativePath: { eq: "secured_by_pp.png" } }) {
+      nodes {
+        childImageSharp {
+          fluid(maxWidth: 400) {
+            ...GatsbyImageSharpFluid_withWebp
           }
         }
       }

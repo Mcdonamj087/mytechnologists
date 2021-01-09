@@ -1,0 +1,21 @@
+@import '../../styles/core';
+
+.content-sidebar {
+  width: 100%;
+  background: #fff;
+  padding: 40px 8vw 50px;
+
+  @include breakpoint('md') {
+    height: 100%;
+    max-width: 455px;
+    text-align: left;
+    display: flex;
+    flex: 1;
+    flex-flow: column;
+    justify-content: space-between;
+    padding: 65px 60px 55px;
+    box-shadow: inset -1px 0 0 rgba($black, 0.1);
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+  }
+}
