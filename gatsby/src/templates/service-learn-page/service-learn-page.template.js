@@ -4,6 +4,7 @@ import Header from '../../components/header/header.component';
 import { Link, graphql } from 'gatsby';
 import Image from 'gatsby-image';
 import ScrollArrow from '../../components/scroll-arrow/scroll-arrow.component';
+import { Controller, Scene } from 'react-scrollmagic';
 import { Tween } from 'react-gsap';
 import BlockContent from '@sanity/block-content-to-react';
 import SEO from '../../components/seo';
@@ -47,41 +48,101 @@ const ServiceAboutPage = ({ data, pageContext, path }) => {
       <SEO bodyClass='service-learn-page' />
       <Header whiteBkg />
       <div className='service-learn-wrapper'>
-        <section className='hero'>
-          <div className='content'>
-            <h6 className='service-title'>{pageContext.serviceName}</h6>
-            <h1 className='headline'>{heroHeadline}</h1>
-            <p className='subtext'>{heroSubtext}</p>
-          </div>
-          <div className='featured-image-wrapper'>
-            <Image className='image' fluid={heroImage.asset.fluid} />
-            <ScrollArrow />
-          </div>
-        </section>
-
-        <section className='what-to-expect'>
-          <div className='content-container'>
-            <div className='inner'>
-              <h1 className='headline'>{whatToExpectHeadline}</h1>
-              <BlockContent
-                className='block-content'
-                blocks={whatToExpectBody._rawData}
-              />
+        <Controller container='.service-learn-wrapper'>
+          <section className='hero'>
+            <div className='content'>
+              <Tween
+                from={tweenFrom}
+                duration={tweenDuration}
+                stagger={tweenDelay}
+                ease={tweenEase}>
+                <h6 className='service-title'>{pageContext.serviceName}</h6>
+                <h1 className='headline'>{heroHeadline}</h1>
+                <p className='subtext'>{heroSubtext}</p>
+              </Tween>
             </div>
-          </div>
-          <div className='image-container'>
-            <Image className='image' fluid={whatToExpectImage.asset.fluid} />
-          </div>
-        </section>
+            <Tween
+              from={tweenFrom}
+              stagger={tweenDelay}
+              ease={tweenEase}
+              duration={tweenDuration}
+              delay={tweenDelay * 3}>
+              <div className='featured-image-wrapper'>
+                <Image className='image' fluid={heroImage?.asset.fluid} />
+                <ScrollArrow />
+              </div>
+            </Tween>
+          </section>
 
-        <section className='convert'>
-          <div className='content'>
-            <h6 className='eyebrow'>Ready to Win Your Dream Job?</h6>
-            <Link className='purchase-link' to={`${path}/purchase`}>
-              Sign Up For Interview Coaching &rarr;
-            </Link>
-          </div>
-        </section>
+          <Scene
+            duration={() => window.innerHeight - 55}
+            indicators={false}
+            triggerHook='onLeave'>
+            {progress => {
+              console.log(progress);
+              return (
+                <Tween
+                  from={{
+                    opacity: 0,
+                  }}
+                  ease='Power1.easeInOut'
+                  progress={progress}
+                  paused>
+                  <section className='what-to-expect'>
+                    <div className='content-container'>
+                      <div className='inner'>
+                        <h1 className='headline'>{whatToExpectHeadline}</h1>
+                        <BlockContent
+                          className='block-content'
+                          blocks={whatToExpectBody?._rawData}
+                        />
+                      </div>
+                    </div>
+                    <div className='image-container'>
+                      <Image
+                        className='image'
+                        fluid={whatToExpectImage?.asset.fluid}
+                      />
+                    </div>
+                  </section>
+                </Tween>
+              );
+            }}
+          </Scene>
+
+          <Scene
+            duration={() => window.innerHeight - 55}
+            indicators={false}
+            triggerElement={`.convert`}
+            triggerHook='onEnter'>
+            {progress => {
+              console.log(progress);
+              return (
+                <Tween
+                  from={{
+                    opacity: 0,
+                  }}
+                  ease='Power1.easeInOut'
+                  progress={progress}
+                  paused>
+                  <section className='convert'>
+                    <div className='content'>
+                      <h6 className='eyebrow'>Ready To Win Your Dream Job?</h6>
+                      <Link className='purchase-link' to={`${path}/purchase`}>
+                        {'Sign Up For Interview Coaching'
+                          .split(' ')
+                          .map(word => (
+                            <span>{`${word}`}&nbsp;</span>
+                          ))}
+                        <span>&rarr;</span>
+                      </Link>
+                    </div>
+                  </section>
+                </Tween>
+              );
+            }}
+          </Scene>
+        </Controller>
       </div>
     </Layout>
   );
