@@ -11,9 +11,8 @@ const LogoMarqee = ({ logos }) => {
         {doubleLogoArray.map(({ _key, image, name }, idx, arr) => {
           const key = idx > arr.length / 2 - 1 ? `${_key}2` : _key;
           return (
-            <div className='marqee-item'>
+            <div key={key} className='marqee-item'>
               <Image
-                key={key}
                 className='logo'
                 fluid={image.asset.fluid}
                 imgStyle={{

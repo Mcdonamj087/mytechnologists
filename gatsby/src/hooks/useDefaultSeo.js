@@ -8,19 +8,7 @@ export const useDefaultSeo = () => {
           generalSiteSettings {
             organizationName
             generalSEO {
-              metaTitle
-              metaDescription
-              previewImage {
-                asset {
-                  fluid(maxWidth: 1440) {
-                    src
-                  }
-                }
-              }
-              ogTitle
-              ogDescription
-              twitterTitle
-              twitterDescription
+              ...SEOData
             }
           }
         }

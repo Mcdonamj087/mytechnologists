@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Layout from '../../components/layout';
 import Header from '../../components/header/header.component';
 import { graphql } from 'gatsby';
@@ -8,6 +8,7 @@ import { InlineWidget } from 'react-calendly';
 import { Tween } from 'react-gsap';
 import BlockContent from '@sanity/block-content-to-react';
 import Button from '../../components/button/button.component';
+import SEO from '../../components/seo';
 
 import './service-purchase-page.styles.scss';
 
@@ -19,12 +20,6 @@ const ServicePurchasePage = ({ pageContext, data }) => {
   const tweenDelay = 0.15;
 
   const paypalBadge = data.allFile.nodes[0];
-
-  useLayoutEffect(() => {
-    document.body.classList.add('service-purchase-page');
-
-    return () => document.body.classList.remove(`service-purchase-page`);
-  }, []);
 
   const featuredImage =
     data.thisService.servicePageContent.homepageContent.featuredImage;
@@ -47,6 +42,7 @@ const ServicePurchasePage = ({ pageContext, data }) => {
 
   return (
     <Layout>
+      <SEO bodyClass='service-purchase-page' />
       <Header />
       <section className='service-purchase--container'>
         {/* price={price}

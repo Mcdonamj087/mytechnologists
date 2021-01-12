@@ -30,12 +30,10 @@ const IndexPage = ({ data }) => {
     previewImage,
     twitterTitle,
     twitterDescription,
-  } = seo;
+  } = seo || {};
 
   const homepageOverlay =
     data.general.nodes[0].generalSiteSettings.homepageOverlay;
-
-  console.log(homepageOverlay);
 
   const homepageScrollWrapper = useRef();
 
@@ -112,9 +110,9 @@ const IndexPage = ({ data }) => {
                 servicePageContent: {
                   general: { navText },
                   homepageContent: { featuredImage, ...props },
-                  purchasePageContent: {
-                    slug: { current: purchaseSlug },
-                  },
+                  // purchasePageContent: {
+                  //   slug: { current: purchaseSlug },
+                  // },
                 },
               }) => {
                 const slug = slugify(navText);
@@ -143,7 +141,8 @@ const IndexPage = ({ data }) => {
                             style={{ opacity: '0' }}
                             featuredImage={featuredImage.asset.fluid}
                             overlay={homepageOverlay}
-                            purchaseSlug={purchaseSlug}
+                            purchaseSlug={`${slugify(navText)}/purchase`}
+                            learnSlug={slugify(navText)}
                             {...props}
                           />
                         </Tween>
@@ -160,6 +159,25 @@ const IndexPage = ({ data }) => {
 };
 
 // TODO: Move SEO query to external staticQuery
+
+export const seoFragment = graphql`
+  fragment SEOData on SanitySeoObject {
+    metaTitle
+    metaDescription
+    previewImage {
+      asset {
+        fluid(maxWidth: 1440) {
+          src
+        }
+      }
+    }
+    ogTitle
+    ogDescription
+    twitterTitle
+    twitterDescription
+  }
+`;
+
 export const query = graphql`
   query {
     general: allSanityGeneral {
@@ -182,19 +200,7 @@ export const query = graphql`
             }
           }
           seo {
-            metaTitle
-            metaDescription
-            previewImage {
-              asset {
-                fluid(maxWidth: 1440) {
-                  src
-                }
-              }
-            }
-            ogTitle
-            ogDescription
-            twitterTitle
-            twitterDescription
+            ...SEOData
           }
         }
       }

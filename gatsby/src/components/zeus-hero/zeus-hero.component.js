@@ -43,7 +43,7 @@ const ZeusHero = forwardRef((props, ref) => {
 
             {props.learnBtnText ? (
               <Button
-                to={'/$btn2Url'}
+                to={`/${props.learnSlug}`}
                 color={props.overlay === true && 'white'}>
                 {props.learnBtnText}
               </Button>

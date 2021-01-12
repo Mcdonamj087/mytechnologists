@@ -174,7 +174,11 @@
         text-align: center;
         margin: auto;
         margin-bottom: 60px;
-        width: columns(16);
+        width: columns(20);
+
+        @include breakpoint('md') {
+          width: columns(16);
+        }
       }
     }
 
@@ -185,7 +189,7 @@
       }
 
       @include breakpoint('md') {
-        width: columns(18);
+        width: columns(16);
       }
     }
   }

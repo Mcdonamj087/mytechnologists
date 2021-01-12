@@ -22,6 +22,10 @@ import instructorsPageObject from './instructors-page-object';
 import whyUsPage from './why-us-page';
 import whyUsPageObject from './why-us-page-object';
 import attributionLogo from './attribution-logo-object';
+import faqPage from './faq-page';
+import faqPageObject from './faq-page-object';
+import faq from './faq';
+import serviceLearnPage from './service-learn-page';
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
   // We name our schema
@@ -40,11 +44,15 @@ export default createSchema({
     servicePage,
     serviceObject,
     servicePurchasePage,
+    serviceLearnPage,
     instructorObject,
     instructorsPage,
     instructorsPageObject,
     whyUsPage,
     whyUsPageObject,
     attributionLogo,
+    faqPage,
+    faqPageObject,
+    faq,
   ]),
 });

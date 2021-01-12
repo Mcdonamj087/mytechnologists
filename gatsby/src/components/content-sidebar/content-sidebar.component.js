@@ -1,5 +1,4 @@
 import React from 'react';
-
 import './content-sidebar.styles.scss';
 
 const ContentSidebar = ({ children }) => (

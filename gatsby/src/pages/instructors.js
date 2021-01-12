@@ -24,7 +24,7 @@ const Instructors = ({ data }) => {
     twitterTitle,
     twitterDescription,
     previewImage,
-  } = seo;
+  } = seo || {};
 
   const [activeInstructor, updateActiveInstructor] = useState(
     instructors[0].name
@@ -95,19 +95,7 @@ export const query = graphql`
       nodes {
         instructorsPageContent {
           seo {
-            metaTitle
-            metaDescription
-            ogTitle
-            ogDescription
-            twitterTitle
-            twitterDescription
-            previewImage {
-              asset {
-                fluid(maxWidth: 1440) {
-                  src
-                }
-              }
-            }
+            ...SEOData
           }
           headline
           subhead

@@ -30,7 +30,7 @@ const WhyUs = ({ data }) => {
     twitterTitle,
     twitterDescription,
     previewImage,
-  } = seo;
+  } = seo || {};
 
   const truncateText = text => text.split('.').slice(0, 2).join('.');
 
@@ -109,19 +109,7 @@ export const query = graphql`
       nodes {
         whyUsPageContent {
           seo {
-            metaTitle
-            metaDescription
-            ogTitle
-            ogDescription
-            twitterTitle
-            twitterDescription
-            previewImage {
-              asset {
-                fluid(maxWidth: 1440) {
-                  src
-                }
-              }
-            }
+            ...SEOData
           }
           ourStoryBody
           image1 {

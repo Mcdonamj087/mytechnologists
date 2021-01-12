@@ -108,11 +108,11 @@ ul {
     position: relative;
 
     &:before {
-      content: '• ';
-      color: black;
+      content: '\25A0';
+      color: inherit;
       position: absolute;
       left: -20px;
-      font-size: 1.2em;
+      font-size: 1em;
     }
   }
 }

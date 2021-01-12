@@ -1,0 +1,152 @@
+@import '../../styles/core';
+
+@keyframes bounce {
+  50% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.service-learn-wrapper {
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  height: calc(100vh - #{$header-height});
+
+  section {
+    height: calc(100vh - 55px);
+    scroll-snap-align: start;
+    display: flex;
+  }
+
+  .hero {
+    position: relative;
+    flex-flow: column;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
+
+    .content {
+      text-align: center;
+      padding: 10vh 0;
+      width: 66.66666667%;
+
+      .service-title {
+        margin-bottom: 20px;
+      }
+
+      .subtext {
+        margin-bottom: 0;
+        max-width: 720px;
+        margin: auto;
+      }
+    }
+
+    .featured-image-wrapper {
+      height: 0;
+      flex: 1;
+      width: 66.66666667%;
+      position: relative;
+
+      .image {
+        height: 100%;
+      }
+
+      &:before {
+        content: '';
+        display: block;
+        height: 50%;
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(to bottom, rgba(#fff, 0), rgba(#fff, 1));
+        z-index: 1;
+      }
+
+      .scroll-arrow {
+        z-index: 1;
+        left: 50%;
+        bottom: 130px;
+      }
+    }
+  }
+
+  .what-to-expect {
+    .content-container,
+    .image-container {
+      flex: 1;
+    }
+
+    .content-container {
+      color: #fff;
+      background: $black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .inner {
+        width: 31vw;
+        min-width: 380px;
+        max-width: 600px;
+      }
+
+      .block-content {
+        h6 {
+          margin-bottom: 10px;
+        }
+      }
+    }
+
+    .image-container {
+      .image {
+        height: 100%;
+      }
+    }
+  }
+
+  .convert {
+    background: #e0b48d;
+    align-items: center;
+    justify-content: center;
+
+    .content {
+      text-align: center;
+
+      .eyebrow {
+        margin-bottom: 30px;
+      }
+
+      .purchase-link {
+        font-size: 46px;
+        line-height: 1.4;
+        color: $black;
+        text-decoration: none;
+        position: relative;
+        display: block;
+
+        &:before {
+          content: '';
+          display: block;
+          background: $black;
+          height: 3px;
+          bottom: 0px;
+          left: 50%;
+          width: 100%;
+          transform: translateX(-50%);
+          position: absolute;
+          transition: 0.4s cubic-bezier(0.65, 0, 0.15, 1);
+        }
+
+        &:hover {
+          animation: 1s bounce infinite;
+
+          &:before {
+            width: 0;
+          }
+        }
+      }
+    }
+  }
+}

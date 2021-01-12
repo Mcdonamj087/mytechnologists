@@ -4,6 +4,7 @@ import { AiFillHome } from 'react-icons/ai';
 import { ImCog } from 'react-icons/im';
 import { BsPeopleFill } from 'react-icons/bs';
 import { AiFillStar } from 'react-icons/ai';
+import { RiQuestionnaireFill } from 'react-icons/ri';
 
 export default () =>
   S.list()
@@ -15,9 +16,13 @@ export default () =>
         .child(S.editor().schemaType('general').documentId('general')),
       ...S.documentTypeListItems().filter(
         listItem =>
-          !['general', 'homepage', 'instructorsPage', 'whyUsPage'].includes(
-            listItem.getId()
-          )
+          ![
+            'general',
+            'homepage',
+            'instructorsPage',
+            'whyUsPage',
+            'faqPage',
+          ].includes(listItem.getId())
       ),
       S.listItem()
         .title('Homepage')
@@ -33,4 +38,8 @@ export default () =>
         .title('Why Us Page')
         .icon(() => <AiFillStar />)
         .child(S.editor().schemaType('whyUsPage').documentId('whyUsPage')),
+      S.listItem()
+        .title('FAQ Page')
+        .icon(() => <RiQuestionnaireFill />)
+        .child(S.editor().schemaType('faqPage').documentId('faqPage')),
     ]);

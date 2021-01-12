@@ -3,16 +3,16 @@ export default {
   name: 'servicePurchasePage',
   type: 'object',
   fields: [
-    {
-      title: 'Slug',
-      name: 'slug',
-      type: 'slug',
-      options: {
-        source: (source, options) =>
-          `${source.servicePageContent.general.navText}-enroll`,
-      },
-      validation: Rule => Rule.required(),
-    },
+    // {
+    //   title: 'Slug',
+    //   name: 'slug',
+    //   type: 'slug',
+    //   options: {
+    //     source: (source, options) =>
+    //       `${source.servicePageContent.general.navText}-enroll`,
+    //   },
+    //   validation: Rule => Rule.required(),
+    // },
     {
       title: 'Headline',
       name: 'headline',

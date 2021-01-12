@@ -9,7 +9,7 @@ export default {
     { name: 'general', title: 'General' },
     { name: 'homepage', title: 'Homepage Section' },
     { name: 'purchasePage', title: 'Purchase Page' },
-    { name: 'infoPage', title: 'Learn Page' },
+    { name: 'learnPage', title: 'Learn Page' },
   ],
   options: {
     // setting layout to object will group the tab content in an object fieldset border.
@@ -37,6 +37,12 @@ export default {
       name: 'purchasePageContent',
       type: 'servicePurchasePage',
       fieldset: 'purchasePage',
+    },
+    {
+      title: 'Learn Page Content',
+      name: 'learnPageContent',
+      type: 'serviceLearnPage',
+      fieldset: 'learnPage',
     },
   ],
 };

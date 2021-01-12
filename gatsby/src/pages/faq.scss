@@ -1,0 +1,38 @@
+@import '../styles/core';
+
+.faq-page-container {
+  display: flex;
+
+  @include breakpoint('md') {
+    position: absolute;
+    top: $header-height;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  .content-sidebar {
+    justify-content: flex-start;
+    box-shadow: none;
+
+    .headline {
+      margin-bottom: 40px;
+
+      @include breakpoint('md') {
+        margin-bottom: 60px;
+      }
+    }
+
+    .accordions-wrapper {
+      margin-bottom: 30px;
+    }
+  }
+
+  .featured-image-container {
+    flex: 1;
+
+    .featured-image {
+      height: 100%;
+    }
+  }
+}
