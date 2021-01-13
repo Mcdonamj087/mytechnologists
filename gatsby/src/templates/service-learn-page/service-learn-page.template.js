@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from 'react';
+import React from 'react';
 import Layout from '../../components/layout';
 import Header from '../../components/header/header.component';
 import { Link, graphql } from 'gatsby';
@@ -8,17 +8,15 @@ import { Controller, Scene } from 'react-scrollmagic';
 import { Tween } from 'react-gsap';
 import BlockContent from '@sanity/block-content-to-react';
 import SEO from '../../components/seo';
+import { useBreakpoint } from 'gatsby-plugin-breakpoints';
 
 import './service-learn-page.styles.scss';
 
 const ServiceAboutPage = ({ data, pageContext, path }) => {
   const tweenFrom = { y: '50', opacity: 0 };
-  const tweenTo = { y: '0', opacity: 1 };
   const tweenDuration = 1.5;
   const tweenEase = 'Expo.easeOut';
   const tweenDelay = 0.15;
-
-  console.log(data, pageContext);
 
   const {
     heroHeadline,
@@ -43,9 +41,25 @@ const ServiceAboutPage = ({ data, pageContext, path }) => {
     twitterDescription,
   } = seo || {};
 
+  const breakpoints = useBreakpoint();
+
+  console.log(breakpoints);
+
   return (
     <Layout wrapped>
-      <SEO bodyClass='service-learn-page' />
+      <SEO
+        bodyClass='service-learn-page'
+        metaTitle={metaTitle || heroHeadline}
+        metaDescription={metaDescription}
+        previewImage={
+          previewImage?.asset.fluid.src || heroImage?.asset.fluid.src
+        }
+        ogTitle={ogTitle || heroHeadline}
+        ogDescription={ogDescription || heroSubtext}
+        twitterTitle={twitterTitle || heroHeadline}
+        twitterDescription={twitterDescription || heroSubtext}
+      />
+
       <Header whiteBkg />
       <div className='service-learn-wrapper'>
         <Controller container='.service-learn-wrapper'>
@@ -77,9 +91,9 @@ const ServiceAboutPage = ({ data, pageContext, path }) => {
           <Scene
             duration={() => window.innerHeight - 55}
             indicators={false}
-            triggerHook='onLeave'>
+            triggerElement='.what-to-expect'
+            triggerHook='onEnter'>
             {progress => {
-              console.log(progress);
               return (
                 <Tween
                   from={{
@@ -113,14 +127,13 @@ const ServiceAboutPage = ({ data, pageContext, path }) => {
           <Scene
             duration={() => window.innerHeight - 55}
             indicators={false}
-            triggerElement={`.convert`}
+            triggerElement='.convert'
             triggerHook='onEnter'>
             {progress => {
-              console.log(progress);
               return (
                 <Tween
                   from={{
-                    opacity: 0,
+                    opacity: breakpoints.sm ? 1 : 0,
                   }}
                   ease='Power1.easeInOut'
                   progress={progress}
@@ -131,8 +144,8 @@ const ServiceAboutPage = ({ data, pageContext, path }) => {
                       <Link className='purchase-link' to={`${path}/purchase`}>
                         {'Sign Up For Interview Coaching'
                           .split(' ')
-                          .map(word => (
-                            <span>{`${word}`}&nbsp;</span>
+                          .map((word, idx) => (
+                            <span key={idx}>{`${word}`}&nbsp;</span>
                           ))}
                         <span>&rarr;</span>
                       </Link>

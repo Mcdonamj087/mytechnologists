@@ -4,19 +4,20 @@ import SEO from '../components/seo';
 import Header from '../components/header/header.component';
 import Image from 'gatsby-image';
 import { Tween } from 'react-gsap';
+import { graphql } from 'gatsby';
 
 import ContentSidebar from '../components/content-sidebar/content-sidebar.component';
-import Accordion from '../components/accordion/accordion';
+import Accordion from '../components/accordion/accordion.component';
 
 //import 'bootstrap/dist/css/bootstrap.min.css';
 import './faq.scss';
 
 const FAQ = ({ data }) => {
   const {
-    seo,
     faqHeadline,
     faqImage,
     faqs,
+    seo,
   } = data.allSanityFaqPage.nodes[0].faqPageContent;
 
   const {
@@ -24,9 +25,9 @@ const FAQ = ({ data }) => {
     metaDescription,
     ogTitle,
     ogDescription,
+    previewImage,
     twitterTitle,
     twitterDescription,
-    previewImage,
   } = seo || {};
 
   const contactEmail = data.allSanityGeneral.nodes[0].generalSiteSettings.email;
@@ -40,9 +41,11 @@ const FAQ = ({ data }) => {
   return (
     <Layout wrapped>
       <SEO
-        title={metaTitle || faqHeadline}
-        description={metaDescription}
-        previewImage={previewImage?.asset.fluid.src || faqImage.asset.fluid.src}
+        metaTitle={metaTitle || faqHeadline}
+        metaDescription={metaDescription}
+        previewImage={
+          previewImage?.asset.fluid.src || faqImage?.asset.fluid.src
+        }
         ogTitle={ogTitle || faqHeadline}
         ogDescription={ogDescription}
         twitterTitle={twitterTitle || faqHeadline}

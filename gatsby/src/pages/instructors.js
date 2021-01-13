@@ -33,14 +33,15 @@ const Instructors = ({ data }) => {
   return (
     <Layout>
       <SEO
-        title={metaTitle}
-        description={metaDescription}
-        previewImage={previewImage.asset.fluid.src}
+        metaTitle={metaTitle}
+        metaDescription={metaDescription}
+        previewImage={previewImage?.asset.fluid.src}
         ogTitle={ogTitle || headline}
         ogDescription={ogDescription || subhead}
         twitterTitle={twitterTitle || headline}
         twitterDescription={twitterDescription || subhead}
       />
+
       <Header whiteBkg />
       <main className='instructors-main'>
         <div className='instructors-panel'>

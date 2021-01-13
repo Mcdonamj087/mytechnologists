@@ -4,7 +4,7 @@ import AccordionContext from 'react-bootstrap/AccordionContext';
 import { useAccordionToggle } from 'react-bootstrap/AccordionToggle';
 import Block from '@sanity/block-content-to-react';
 
-import './accordion.scss';
+import './accordion.styles.scss';
 
 const ContextAwareToggle = ({ eventKey, text, callback }) => {
   const currentEventKey = useContext(AccordionContext);
@@ -17,12 +17,12 @@ const ContextAwareToggle = ({ eventKey, text, callback }) => {
   const isCurrentEventKey = currentEventKey === eventKey;
 
   return (
-    <div
+    <button
       className={`toggle ${isCurrentEventKey ? 'is-open' : ''}`}
       onClick={decoratedOnClick}>
       <h4 className='accordion-title'>{text}</h4>
       <div className='indicator' />
-    </div>
+    </button>
   );
 };
 

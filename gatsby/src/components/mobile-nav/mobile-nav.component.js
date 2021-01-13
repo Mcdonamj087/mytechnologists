@@ -5,7 +5,7 @@ import { slugify } from '../../utils';
 import './mobile-nav.styles.scss';
 
 const MobileNav = () => {
-  const { services } = useStaticQuery(graphql`
+  const { services, general } = useStaticQuery(graphql`
     query {
       services: allSanityServicePage {
         nodes {
@@ -17,8 +17,16 @@ const MobileNav = () => {
           }
         }
       }
+      general: allSanityGeneral {
+        nodes {
+          generalSiteSettings {
+            email
+          }
+        }
+      }
     }
   `);
+  const email = general.nodes[0].generalSiteSettings.email;
 
   const [isOpen, toggleNavOpen] = useState(false);
 
@@ -94,6 +102,9 @@ const MobileNav = () => {
             onClick={handleHamburgerClick}>
             FAQ
           </Link>
+          <a className='mobile-nav-item' href={`mailto:${email}`}>
+            Contact Us
+          </a>
         </nav>
       </div>
     </>

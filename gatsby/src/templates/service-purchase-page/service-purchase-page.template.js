@@ -14,7 +14,6 @@ import './service-purchase-page.styles.scss';
 
 const ServicePurchasePage = ({ pageContext, data }) => {
   const tweenFrom = { y: '50', opacity: 0 };
-  const tweenTo = { y: '0', opacity: 1 };
   const tweenDuration = 1.5;
   const tweenEase = 'Expo.easeOut';
   const tweenDelay = 0.15;
@@ -30,7 +29,20 @@ const ServicePurchasePage = ({ pageContext, data }) => {
     details,
     eventLink,
     eventLinkAlt,
+    seo,
   } = pageContext.pageContent;
+
+  const {
+    metaTitle,
+    metaDescription,
+    ogTitle,
+    ogDescription,
+    previewImage,
+    twitterTitle,
+    twitterDescription,
+  } = seo || {};
+
+  console.log(metaTitle);
 
   const primaryColorHex = pageContext.primaryBrandColor.substr(1);
 
@@ -42,21 +54,24 @@ const ServicePurchasePage = ({ pageContext, data }) => {
 
   return (
     <Layout>
-      <SEO bodyClass='service-purchase-page' />
+      <SEO
+        bodyClass='service-purchase-page'
+        metaTitle={metaTitle || headline}
+        metaDescription={metaDescription}
+        previewImage={
+          previewImage?.asset.fluid.src || featuredImage?.asset.fluid.src
+        }
+        ogTitle={ogTitle || headline}
+        ogDescription={ogDescription}
+        twitterTitle={twitterTitle || headline}
+        twitterDescription={twitterDescription}
+      />
       <Header />
       <section className='service-purchase--container'>
-        {/* price={price}
-        title={headline}
-        details={details}
-        eventLinkBtns={eventLink && eventLinkAlt}
-        activeCalendar={activeCalendar}
-        btnClickHandler={handleEventBtnClick} */}
-
         <ContentSidebar>
           <div className='service-details'>
             <Tween
               from={tweenFrom}
-              to={tweenTo}
               duration={tweenDuration}
               ease={tweenEase}
               delay={tweenDelay}>
@@ -64,7 +79,6 @@ const ServicePurchasePage = ({ pageContext, data }) => {
             </Tween>
             <Tween
               from={tweenFrom}
-              to={tweenTo}
               duration={tweenDuration}
               ease={tweenEase}
               delay={tweenDelay * 2}>
@@ -75,11 +89,7 @@ const ServicePurchasePage = ({ pageContext, data }) => {
                 />
               </div>
             </Tween>
-            <Tween
-              from={tweenFrom}
-              to={tweenTo}
-              duration={tweenDuration}
-              ease={tweenEase}>
+            <Tween from={tweenFrom} duration={tweenDuration} ease={tweenEase}>
               <h3 className='service-details--price'>{`$${price}`}</h3>
             </Tween>
           </div>
@@ -87,7 +97,6 @@ const ServicePurchasePage = ({ pageContext, data }) => {
           {eventLinkAlt && (
             <Tween
               from={tweenFrom}
-              to={tweenTo}
               duration={tweenDuration}
               ease={tweenEase}
               delay={tweenDelay * 3}>
@@ -108,12 +117,18 @@ const ServicePurchasePage = ({ pageContext, data }) => {
             </Tween>
           )}
 
-          <div className='foot'>
-            <Image
-              className='paypal-badge'
-              fluid={paypalBadge.childImageSharp.fluid}
-            />
-          </div>
+          <Tween
+            from={tweenFrom}
+            duration={tweenDuration}
+            ease={tweenEase}
+            delay={tweenDelay * 4}>
+            <div className='foot'>
+              <Image
+                className='paypal-badge'
+                fluid={paypalBadge.childImageSharp.fluid}
+              />
+            </div>
+          </Tween>
         </ContentSidebar>
 
         <div className='service-purchase--main'>

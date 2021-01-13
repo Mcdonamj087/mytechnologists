@@ -6,6 +6,7 @@ import ScrollArrow from '../components/scroll-arrow/scroll-arrow.component';
 import LogoMarqee from '../components/logo-marqee/logo-marqee';
 import Image from 'gatsby-image';
 import Block from '@sanity/block-content-to-react';
+import { graphql } from 'gatsby';
 
 import './why-us.scss';
 
@@ -37,8 +38,8 @@ const WhyUs = ({ data }) => {
   return (
     <Layout wrapped>
       <SEO
-        title={metaTitle}
-        description={metaDescription}
+        metaTitle={metaTitle}
+        metaDescription={metaDescription}
         previewImage={previewImage.asset.fluid.src}
         ogTitle={ogTitle || whyChooseUsHeadline}
         ogDescription={ogDescription || truncateText(whyChooseUsBody)}

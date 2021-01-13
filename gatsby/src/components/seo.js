@@ -6,11 +6,11 @@ import useDefaultSeo from '../hooks/useDefaultSeo';
 function SEO({
   bodyClass,
   lang,
-  title,
-  description,
-  previewImage,
+  metaTitle,
+  metaDescription,
   ogTitle,
   ogDescription,
+  previewImage,
   twitterTitle,
   twitterDescription,
 }) {
@@ -26,8 +26,8 @@ function SEO({
     twitterDescription: defaultTwitterDescription,
   } = defaultSeo.generalSEO;
 
-  const titleCascade = title || defaultMetaTitle;
-  const descriptionCascade = description || defaultMetaDescription;
+  const titleCascade = metaTitle || defaultMetaTitle;
+  const descriptionCascade = metaDescription || defaultMetaDescription;
   const previewImageCascade =
     previewImage || defaultPreviewImage?.asset.fluid.src;
 
@@ -43,7 +43,7 @@ function SEO({
       <body className={bodyClass} />
       <meta name='description' content={descriptionCascade} />
       <meta name='og:image' content={previewImageCascade} />
-      <meta name='og:title' content={ogTitle || title || defaultOgTitle} />
+      <meta name='og:title' content={ogTitle || metaTitle || defaultOgTitle} />
       <meta
         name='og:description'
         content={ogDescription || defaultOgDescription || descriptionCascade}
@@ -53,7 +53,7 @@ function SEO({
       <meta name='twitter:image' content={previewImageCascade} />
       <meta
         name='twitter:title'
-        content={twitterTitle || defaultTwitterTitle || title}
+        content={twitterTitle || defaultTwitterTitle || metaTitle}
       />
       <meta
         name='twitter:description'

@@ -46,6 +46,18 @@
   .toggle {
     cursor: pointer;
     position: relative;
+    padding: 0;
+    text-align: left;
+    background: transparent;
+    border: 0;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:focus-visible {
+      outline: auto 5px -webkit-focus-ring-color;
+    }
 
     &.is-open {
       .indicator {

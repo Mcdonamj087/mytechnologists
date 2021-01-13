@@ -50,6 +50,17 @@ module.exports = {
     },
     `gatsby-plugin-optimize-svgs`,
     `gatsby-plugin-styled-components`,
+    {
+      resolve: 'gatsby-plugin-breakpoints',
+      options: {
+        queries: {
+          sm: '(max-width: 575px)',
+          md: '(max-width: 767px)',
+          l: '(max-width: 991px)',
+          xl: '(max-width: 1199px)',
+        },
+      },
+    },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,

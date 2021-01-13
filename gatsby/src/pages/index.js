@@ -48,8 +48,8 @@ const IndexPage = ({ data }) => {
   return (
     <Layout>
       <SEO
-        title={metaTitle}
-        description={metaDescription}
+        metaTitle={metaTitle}
+        metaDescription={metaDescription}
         previewImage={
           previewImage?.asset.fluid.src || featuredImage?.asset.fluid.src
         }
@@ -110,9 +110,6 @@ const IndexPage = ({ data }) => {
                 servicePageContent: {
                   general: { navText },
                   homepageContent: { featuredImage, ...props },
-                  // purchasePageContent: {
-                  //   slug: { current: purchaseSlug },
-                  // },
                 },
               }) => {
                 const slug = slugify(navText);
@@ -205,7 +202,6 @@ export const query = graphql`
         }
       }
     }
-
     services: allSanityServicePage {
       nodes {
         id
