@@ -42,8 +42,6 @@ const ServicePurchasePage = ({ pageContext, data }) => {
     twitterDescription,
   } = seo || {};
 
-  console.log(metaTitle);
-
   const primaryColorHex = pageContext.primaryBrandColor.substr(1);
 
   const [activeCalendar, toggleActiveCalendar] = useState(1);

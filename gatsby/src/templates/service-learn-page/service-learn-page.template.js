@@ -43,8 +43,6 @@ const ServiceAboutPage = ({ data, pageContext, path }) => {
 
   const breakpoints = useBreakpoint();
 
-  console.log(breakpoints);
-
   return (
     <Layout wrapped>
       <SEO

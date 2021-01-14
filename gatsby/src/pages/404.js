@@ -43,7 +43,6 @@ const Content = styled.div`
 const NotFoundPage = ({ data }) => {
   const image = data.file.childImageSharp.fluid;
 
-  console.log(data);
   return (
     <Layout>
       <SEO title='404: Not found' />

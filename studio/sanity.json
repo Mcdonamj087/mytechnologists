@@ -1,11 +1,11 @@
 {
   "root": true,
-  "project": {
-    "name": "my-technologist"
-  },
   "api": {
     "projectId": "f9me0pd4",
     "dataset": "production"
+  },
+  "project": {
+    "name": "my-technologists"
   },
   "plugins": [
     "@sanity/base",
