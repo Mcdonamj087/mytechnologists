@@ -140,7 +140,7 @@ const ServiceAboutPage = ({ data, pageContext, path }) => {
                     <div className='content'>
                       <h6 className='eyebrow'>Ready To Win Your Dream Job?</h6>
                       <Link className='purchase-link' to={`${path}/purchase`}>
-                        {'Sign Up For Interview Coaching'
+                        {`Sign Up For ${pageContext.serviceName}`
                           .split(' ')
                           .map((word, idx) => (
                             <span key={idx}>{`${word}`}&nbsp;</span>
