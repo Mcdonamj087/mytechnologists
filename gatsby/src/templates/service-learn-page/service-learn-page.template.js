@@ -9,6 +9,7 @@ import { Tween } from 'react-gsap';
 import BlockContent from '@sanity/block-content-to-react';
 import SEO from '../../components/seo';
 import { useBreakpoint } from 'gatsby-plugin-breakpoints';
+import Button from '../../components/button/button.component';
 
 import './service-learn-page.styles.scss';
 
@@ -138,15 +139,8 @@ const ServiceAboutPage = ({ data, pageContext, path }) => {
                   paused>
                   <section className='convert'>
                     <div className='content'>
-                      <h6 className='eyebrow'>Ready To Win Your Dream Job?</h6>
-                      <Link className='purchase-link' to={`${path}/purchase`}>
-                        {`Sign Up For ${pageContext.serviceName}`
-                          .split(' ')
-                          .map((word, idx) => (
-                            <span key={idx}>{`${word}`}&nbsp;</span>
-                          ))}
-                        <span>&rarr;</span>
-                      </Link>
+                      <h3 className='headline'>Ready To Win Your Dream Job?</h3>
+                      <Button to={`${path}/purchase`}>Purchase Now</Button>
                     </div>
                   </section>
                 </Tween>
@@ -158,33 +152,6 @@ const ServiceAboutPage = ({ data, pageContext, path }) => {
     </Layout>
   );
 };
-
-// export const data = graphql`
-//   query($id: String!) {
-//     thisService: sanityServicePage(_id: { eq: $id }) {
-//       servicePageContent {
-//         homepageContent {
-//           featuredImage {
-//             asset {
-//               fluid(maxWidth: 1680) {
-//                 ...GatsbySanityImageFluid
-//               }
-//             }
-//           }
-//         }
-//       }
-//     }
-//     allFile(filter: { relativePath: { eq: "secured_by_pp.png" } }) {
-//       nodes {
-//         childImageSharp {
-//           fluid(maxWidth: 400) {
-//             ...GatsbyImageSharpFluid_withWebp
-//           }
-//         }
-//       }
-//     }
-//   }
-// `;
 
 export const query = graphql`
   query($id: String!) {
