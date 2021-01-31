@@ -4,7 +4,7 @@ import './button.styles.scss';
 
 const Button = props => {
   const className = `btn ${props.color === 'white' ? 'white' : ''} ${
-    props.className
+    props.className ? props.className : ''
   }`;
   return props.type === 'button' ? (
     <button className={className} onClick={props.onClick}>

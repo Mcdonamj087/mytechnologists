@@ -9,6 +9,7 @@ import { Tween } from 'react-gsap';
 import BlockContent from '@sanity/block-content-to-react';
 import Button from '../../components/button/button.component';
 import SEO from '../../components/seo';
+import { slugify } from '../../utils';
 
 import './service-purchase-page.styles.scss';
 
@@ -22,6 +23,10 @@ const ServicePurchasePage = ({ pageContext, data }) => {
 
   const featuredImage =
     data.thisService.servicePageContent.homepageContent.featuredImage;
+
+  const learnSlug = slugify(
+    data.thisService.servicePageContent.general.navText
+  );
 
   const {
     price,
@@ -73,7 +78,12 @@ const ServicePurchasePage = ({ pageContext, data }) => {
               duration={tweenDuration}
               ease={tweenEase}
               delay={tweenDelay}>
-              <h1 className='service-details--title'>{headline}</h1>
+              <h1 className='service-details--title'>
+                {headline}{' '}
+                <Button to={`/${learnSlug}`} className='outline'>
+                  Learn More
+                </Button>
+              </h1>
             </Tween>
             <Tween
               from={tweenFrom}
@@ -170,6 +180,9 @@ export const data = graphql`
   query($id: String!) {
     thisService: sanityServicePage(_id: { eq: $id }) {
       servicePageContent {
+        general {
+          navText
+        }
         homepageContent {
           featuredImage {
             asset {
