@@ -37,11 +37,41 @@ const IndexPage = ({ data }) => {
 
   const homepageScrollWrapper = useRef();
 
+  let serviceBlockCheckPoints = handleResize();
+
+  // Adding a window resize handler to create a new array of
+  // section breakpoints which the scroll handler will use
+  // to determine which service block is in view.
+  function handleResize() {
+    serviceBlockCheckPoints = services.map(
+      (service, idx) => window.innerHeight * (idx + 1)
+    );
+    return serviceBlockCheckPoints;
+  }
+
+  // A scroll handler to update the url fragment based on which
+  // service block is in view
+  function handleScroll(e) {
+    const scrollDistance = e.target.scrollTop;
+
+    if (serviceBlockCheckPoints.indexOf(scrollDistance) >= 0) {
+      const scrollIndex = serviceBlockCheckPoints.indexOf(scrollDistance);
+      const hash = slugify(
+        services[scrollIndex].servicePageContent.general.navText
+      );
+      window.location.hash = hash;
+    }
+  }
+
   useLayoutEffect(() => {
     disableBodyScroll(homepageScrollWrapper.current);
+    homepageScrollWrapper.current.addEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleResize);
 
     return () => {
       enableBodyScroll(homepageScrollWrapper.current);
+      homepageScrollWrapper.current.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleResize);
     };
   }, []);
 
