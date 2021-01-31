@@ -43,6 +43,10 @@ const IndexPage = ({ data }) => {
   // section breakpoints which the scroll handler will use
   // to determine which service block is in view.
   function handleResize() {
+    if (typeof window === 'undefined') {
+      return false;
+    }
+
     serviceBlockCheckPoints = services.map(
       (service, idx) => window.innerHeight * (idx + 1)
     );
@@ -52,6 +56,9 @@ const IndexPage = ({ data }) => {
   // A scroll handler to update the url fragment based on which
   // service block is in view
   function handleScroll(e) {
+    if (typeof window === 'undefined') {
+      return false;
+    }
     const scrollDistance = e.target.scrollTop;
 
     if (serviceBlockCheckPoints.indexOf(scrollDistance) >= 0) {
@@ -64,6 +71,9 @@ const IndexPage = ({ data }) => {
   }
 
   useLayoutEffect(() => {
+    if (typeof window === 'undefined') {
+      return false;
+    }
     disableBodyScroll(homepageScrollWrapper.current);
     homepageScrollWrapper.current.addEventListener('scroll', handleScroll);
     window.addEventListener('resize', handleResize);
