@@ -1,7 +1,7 @@
 import React from 'react';
 import FBIcon from '../../assets/svg/fb-icon.inline.svg';
 import LIIcon from '../../assets/svg/li-icon.inline.svg';
-import IGIcon from '../../assets/svg/IG-icon.inline.svg';
+import IGIcon from '../../assets/svg/ig-icon.inline.svg';
 
 import './social-icons.styles.scss';
 
