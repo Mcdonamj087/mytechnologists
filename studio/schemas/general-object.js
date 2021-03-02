@@ -8,6 +8,7 @@ export default {
   fieldsets: [
     { name: 'seo', title: 'SEO Defaults' },
     { name: 'theme', title: 'Theme' },
+    { name: 'socialMedia', title: 'Social Media' },
     { name: 'contact', title: 'Contact' },
   ],
   options: {
@@ -39,6 +40,24 @@ export default {
       name: 'homepageOverlay',
       type: 'boolean',
       fieldset: 'theme',
+    },
+    {
+      title: 'Facebook URL',
+      name: 'facebookUrl',
+      type: 'url',
+      fieldset: 'socialMedia',
+    },
+    {
+      title: 'LinkedIn URL',
+      name: 'linkedinUrl',
+      type: 'url',
+      fieldset: 'socialMedia',
+    },
+    {
+      title: 'Instagram URL',
+      name: 'instagramUrl',
+      type: 'url',
+      fieldset: 'socialMedia',
     },
     {
       title: 'Organization Name',

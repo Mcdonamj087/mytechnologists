@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useStaticQuery, graphql } from 'gatsby';
 import { slugify } from '../../utils';
+import SocialIcons from '../social-icons/social-icons.component';
 
 import './mobile-nav.styles.scss';
 
@@ -106,6 +107,9 @@ const MobileNav = () => {
             Contact Us
           </a>
         </nav>
+        <div className='mt-mobile-nav__foot'>
+          <SocialIcons />
+        </div>
       </div>
     </>
   );

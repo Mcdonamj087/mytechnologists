@@ -83,7 +83,7 @@ const IndexPage = ({ data }) => {
       homepageScrollWrapper.current.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleResize);
     };
-  }, []);
+  });
 
   return (
     <Layout>
@@ -262,11 +262,6 @@ export const query = graphql`
             }
             purchaseBtnText
             learnBtnText
-          }
-          purchasePageContent {
-            slug {
-              current
-            }
           }
         }
       }
